@@ -1,0 +1,46 @@
+{
+  "id": "toy_escalating_rumors_v0",
+  "description": "Escalating message waves to one hub: alternating senders and intensifying base confidence on the same subject.",
+  "config": {
+    "primary_subject": "market_fire",
+    "belief_decay_multiplier": 1.2,
+    "need_passive_decay_multiplier": 1.3
+  },
+  "rumors": {
+    "fire_small": {
+      "subject": "market_fire",
+      "proposition": "A small fire started near the market.",
+      "truth": true
+    },
+    "fire_large": {
+      "subject": "market_fire",
+      "proposition": "The market is engulfed in flames.",
+      "truth": false
+    }
+  },
+  "agents": {
+    "hub": {
+      "needs": { "hunger": 0.5, "rest": 0.5, "safety": 0.35, "social": 0.55 },
+      "relationships": {
+        "s1": { "trust": 0.7 },
+        "s2": { "trust": 0.1 },
+        "s3": { "trust": 0.6 },
+        "s4": { "trust": -0.5 }
+      },
+      "beliefs": {},
+      "goals": { "evacuate": { "description": "Leave if danger is real", "priority": 0.85 } },
+      "values": {}
+    },
+    "s1": { "needs": { "hunger": 0.8, "rest": 0.8, "safety": 0.8, "social": 0.5 }, "relationships": {}, "beliefs": {}, "goals": {}, "values": {} },
+    "s2": { "needs": { "hunger": 0.8, "rest": 0.8, "safety": 0.8, "social": 0.5 }, "relationships": {}, "beliefs": {}, "goals": {}, "values": {} },
+    "s3": { "needs": { "hunger": 0.8, "rest": 0.8, "safety": 0.8, "social": 0.5 }, "relationships": {}, "beliefs": {}, "goals": {}, "values": {} },
+    "s4": { "needs": { "hunger": 0.8, "rest": 0.8, "safety": 0.8, "social": 0.5 }, "relationships": {}, "beliefs": {}, "goals": {}, "values": {} }
+  },
+  "events": [
+    { "t": 0, "type": "message", "from": "s1", "to": "hub", "rumor_id": "fire_small", "confidence": 0.7 },
+    { "t": 2, "type": "message", "from": "s4", "to": "hub", "rumor_id": "fire_large", "confidence": 0.85 },
+    { "t": 4, "type": "message", "from": "s3", "to": "hub", "rumor_id": "fire_small", "confidence": 0.8 },
+    { "t": 6, "type": "message", "from": "s2", "to": "hub", "rumor_id": "fire_large", "confidence": 0.9 },
+    { "t": 8, "type": "message", "from": "s4", "to": "hub", "rumor_id": "fire_large", "confidence": 0.92 }
+  ]
+}

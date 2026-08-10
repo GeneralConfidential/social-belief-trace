@@ -1,0 +1,47 @@
+{
+  "id": "toy_adversarial_injection_v0",
+  "description": "Simultaneous conflicting injections: high-confidence false claim from a hostile source vs moderate true claim from a friend.",
+  "config": {
+    "primary_subject": "supply_route",
+    "belief_decay_multiplier": 1.0
+  },
+  "rumors": {
+    "route_blocked": {
+      "subject": "supply_route",
+      "proposition": "The supply route is blocked by bandits.",
+      "truth": false
+    },
+    "route_clear": {
+      "subject": "supply_route",
+      "proposition": "The supply route is clear.",
+      "truth": true
+    }
+  },
+  "agents": {
+    "receiver": {
+      "needs": { "hunger": 0.55, "rest": 0.6, "safety": 0.4, "social": 0.5 },
+      "relationships": { "friend": { "trust": 0.75 }, "hostile": { "trust": -0.8 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "friend": {
+      "needs": { "hunger": 0.7, "rest": 0.7, "safety": 0.7, "social": 0.6 },
+      "relationships": {},
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "hostile": {
+      "needs": { "hunger": 0.7, "rest": 0.7, "safety": 0.7, "social": 0.6 },
+      "relationships": {},
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    }
+  },
+  "events": [
+    { "t": 1, "type": "message", "from": "hostile", "to": "receiver", "rumor_id": "route_blocked", "confidence": 0.95 },
+    { "t": 1, "type": "message", "from": "friend", "to": "receiver", "rumor_id": "route_clear", "confidence": 0.75 }
+  ]
+}

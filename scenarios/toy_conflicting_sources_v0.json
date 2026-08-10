@@ -1,0 +1,48 @@
+{
+  "id": "toy_conflicting_sources_v0",
+  "description": "Same subject, opposing claims: a trusted ally and a hostile source both message the hub agent about water safety.",
+  "config": {
+    "primary_subject": "water_safety",
+    "belief_decay_multiplier": 0.8
+  },
+  "rumors": {
+    "water_safe": {
+      "subject": "water_safety",
+      "proposition": "The town water is safe to drink.",
+      "truth": true
+    },
+    "water_poisoned": {
+      "subject": "water_safety",
+      "proposition": "The town water has been poisoned.",
+      "truth": false
+    }
+  },
+  "agents": {
+    "hub": {
+      "needs": { "hunger": 0.6, "rest": 0.6, "safety": 0.45, "social": 0.5 },
+      "relationships": { "ally": { "trust": 0.85 }, "rival": { "trust": -0.7 } },
+      "beliefs": {},
+      "goals": { "stay_safe": { "description": "Avoid poisoned supplies", "priority": 0.8 } },
+      "values": {}
+    },
+    "ally": {
+      "needs": { "hunger": 0.7, "rest": 0.7, "safety": 0.7, "social": 0.6 },
+      "relationships": { "hub": { "trust": 0.5 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "rival": {
+      "needs": { "hunger": 0.7, "rest": 0.7, "safety": 0.7, "social": 0.6 },
+      "relationships": { "hub": { "trust": -0.2 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    }
+  },
+  "events": [
+    { "t": 0, "type": "message", "from": "rival", "to": "hub", "rumor_id": "water_poisoned", "confidence": 0.92 },
+    { "t": 1, "type": "message", "from": "ally", "to": "hub", "rumor_id": "water_safe", "confidence": 0.88 },
+    { "t": 3, "type": "message", "from": "rival", "to": "hub", "rumor_id": "water_poisoned", "confidence": 0.85 }
+  ]
+}

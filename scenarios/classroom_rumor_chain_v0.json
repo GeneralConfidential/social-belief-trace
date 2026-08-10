@@ -1,0 +1,49 @@
+{
+  "id": "classroom_rumor_chain_v0",
+  "description": "Teaching-lab / education probe: a grade rumor is injected at the head of a four-student trust chain; spread depends on gossip along rising trust links (non-game classroom framing).",
+  "config": {
+    "primary_subject": "exam_curve",
+    "belief_decay_multiplier": 0.75,
+    "need_passive_decay_multiplier": 1.0
+  },
+  "rumors": {
+    "curve_rumor": {
+      "subject": "exam_curve",
+      "proposition": "The midterm will be graded on a steep curve.",
+      "truth": false
+    }
+  },
+  "agents": {
+    "s1": {
+      "needs": { "hunger": 0.7, "rest": 0.55, "safety": 0.6, "social": 0.4 },
+      "relationships": { "s2": { "trust": 0.9 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "s2": {
+      "needs": { "hunger": 0.7, "rest": 0.6, "safety": 0.6, "social": 0.45 },
+      "relationships": { "s1": { "trust": 0.7 }, "s3": { "trust": 0.8 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "s3": {
+      "needs": { "hunger": 0.7, "rest": 0.6, "safety": 0.55, "social": 0.5 },
+      "relationships": { "s2": { "trust": 0.75 }, "s4": { "trust": 0.85 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "s4": {
+      "needs": { "hunger": 0.7, "rest": 0.65, "safety": 0.6, "social": 0.45 },
+      "relationships": { "s3": { "trust": 0.7 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    }
+  },
+  "events": [
+    { "t": 0, "type": "message", "from": "s2", "to": "s1", "rumor_id": "curve_rumor", "confidence": 0.8 }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "toy_help_stranger_v0",
+  "description": "Moral hazard: agent a (utility) chooses between eating for self and paying hunger/rest to help starving stranger s. Order is s then a so s uses Routine and a uses Utility.",
+  "agents": {
+    "s": {
+      "needs": { "hunger": 0.07, "rest": 0.72, "safety": 0.75, "social": 0.5 },
+      "relationships": { "a": { "trust": 0.0 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "a": {
+      "needs": { "hunger": 0.52, "rest": 0.72, "safety": 0.78, "social": 0.48 },
+      "relationships": { "s": { "trust": 0.0 } },
+      "beliefs": {},
+      "goals": {
+        "aid_stranger": { "description": "Help someone in dire need", "priority": 0.88 }
+      },
+      "values": {
+        "compassion": { "description": "Alleviate suffering when you can", "rigidity": 0.72 }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "toy_multihop_chain_v0",
+  "description": "Four-agent chain: rumor injected at the head; spread depends on repeated gossip along rising trust links.",
+  "config": {
+    "primary_subject": "gate_open",
+    "belief_decay_multiplier": 0.7,
+    "need_passive_decay_multiplier": 1.0
+  },
+  "rumors": {
+    "gate_rumor": {
+      "subject": "gate_open",
+      "proposition": "The north gate was left open overnight.",
+      "truth": true
+    }
+  },
+  "agents": {
+    "a": {
+      "needs": { "hunger": 0.75, "rest": 0.75, "safety": 0.5, "social": 0.35 },
+      "relationships": { "b": { "trust": 0.9 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "b": {
+      "needs": { "hunger": 0.75, "rest": 0.75, "safety": 0.55, "social": 0.4 },
+      "relationships": { "a": { "trust": 0.3 }, "c": { "trust": 0.85 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "c": {
+      "needs": { "hunger": 0.75, "rest": 0.75, "safety": 0.55, "social": 0.4 },
+      "relationships": { "b": { "trust": 0.25 }, "d": { "trust": 0.88 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "d": {
+      "needs": { "hunger": 0.75, "rest": 0.75, "safety": 0.6, "social": 0.45 },
+      "relationships": { "c": { "trust": 0.2 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    }
+  },
+  "events": [
+    { "t": 0, "type": "message", "from": "b", "to": "a", "rumor_id": "gate_rumor", "confidence": 0.9 }
+  ]
+}

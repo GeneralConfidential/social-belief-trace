@@ -1,0 +1,47 @@
+{
+  "id": "newsroom_adversarial_tip_v0",
+  "description": "Journalism / integrity red-team: a hostile source injects a high-confidence false tip while a trusted source sends a moderate true tip about the same subject in the same window.",
+  "config": {
+    "primary_subject": "source_identity",
+    "belief_decay_multiplier": 1.0
+  },
+  "rumors": {
+    "false_tip": {
+      "subject": "source_identity",
+      "proposition": "The anonymous whistleblower is a foreign intelligence plant.",
+      "truth": false
+    },
+    "true_tip": {
+      "subject": "source_identity",
+      "proposition": "The anonymous whistleblower is a verified internal employee.",
+      "truth": true
+    }
+  },
+  "agents": {
+    "editor": {
+      "needs": { "hunger": 0.65, "rest": 0.55, "safety": 0.5, "social": 0.5 },
+      "relationships": { "reporter": { "trust": 0.8 }, "hostile": { "trust": -0.75 } },
+      "beliefs": {},
+      "goals": { "verify": { "description": "Publish only verified claims", "priority": 0.85 } },
+      "values": { "accuracy": { "description": "Prefer verified sources", "rigidity": 0.7 } }
+    },
+    "reporter": {
+      "needs": { "hunger": 0.7, "rest": 0.6, "safety": 0.55, "social": 0.55 },
+      "relationships": { "editor": { "trust": 0.7 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "hostile": {
+      "needs": { "hunger": 0.75, "rest": 0.7, "safety": 0.5, "social": 0.35 },
+      "relationships": { "editor": { "trust": 0.0 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    }
+  },
+  "events": [
+    { "t": 0, "type": "message", "from": "hostile", "to": "editor", "rumor_id": "false_tip", "confidence": 0.94 },
+    { "t": 0, "type": "message", "from": "reporter", "to": "editor", "rumor_id": "true_tip", "confidence": 0.7 }
+  ]
+}

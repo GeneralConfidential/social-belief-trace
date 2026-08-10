@@ -1,0 +1,30 @@
+{
+  "id": "toy_rumor_v0",
+  "description": "Rumor injection with provenance/confidence. Agents receive messages that update beliefs weighted by trust.",
+  "rumors": {
+    "r1": { "proposition": "The well is poisoned.", "truth": false },
+    "r2": { "proposition": "Bandits were seen near town.", "truth": true }
+  },
+  "agents": {
+    "a": {
+      "needs": { "hunger": 0.7, "rest": 0.7, "safety": 0.6, "social": 0.6 },
+      "relationships": { "b": { "trust": 0.6 }, "c": { "trust": -0.4 } },
+      "beliefs": {}
+    },
+    "b": {
+      "needs": { "hunger": 0.7, "rest": 0.7, "safety": 0.6, "social": 0.6 },
+      "relationships": { "a": { "trust": 0.2 } },
+      "beliefs": {}
+    },
+    "c": {
+      "needs": { "hunger": 0.7, "rest": 0.7, "safety": 0.6, "social": 0.6 },
+      "relationships": { "a": { "trust": 0.0 } },
+      "beliefs": {}
+    }
+  },
+  "events": [
+    { "t": 0, "type": "message", "from": "b", "to": "a", "rumor_id": "r2", "confidence": 0.8 },
+    { "t": 1, "type": "message", "from": "c", "to": "a", "rumor_id": "r1", "confidence": 0.9 }
+  ]
+}
+

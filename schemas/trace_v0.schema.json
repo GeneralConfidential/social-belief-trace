@@ -1,0 +1,267 @@
+{
+  "$defs": {
+    "Action": {
+      "properties": {
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "payload": {
+          "additionalProperties": true,
+          "title": "Payload",
+          "type": "object"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "Action",
+      "type": "object"
+    },
+    "AgentState": {
+      "properties": {
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "beliefs": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Belief"
+          },
+          "title": "Beliefs",
+          "type": "object"
+        },
+        "goals": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Goal"
+          },
+          "title": "Goals",
+          "type": "object"
+        },
+        "needs": {
+          "additionalProperties": {
+            "$ref": "#/$defs/NeedState"
+          },
+          "propertyNames": {
+            "enum": [
+              "hunger",
+              "rest",
+              "safety",
+              "social"
+            ]
+          },
+          "title": "Needs",
+          "type": "object"
+        },
+        "relationships": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Relationship"
+          },
+          "title": "Relationships",
+          "type": "object"
+        },
+        "values": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Value"
+          },
+          "title": "Values",
+          "type": "object"
+        }
+      },
+      "required": [
+        "agent_id",
+        "needs"
+      ],
+      "title": "AgentState",
+      "type": "object"
+    },
+    "Belief": {
+      "properties": {
+        "confidence": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "proposition": {
+          "title": "Proposition",
+          "type": "string"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        },
+        "subject": {
+          "default": "",
+          "title": "Subject",
+          "type": "string"
+        },
+        "truth": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Truth"
+        }
+      },
+      "required": [
+        "proposition"
+      ],
+      "title": "Belief",
+      "type": "object"
+    },
+    "ExplanationTrace": {
+      "properties": {
+        "factors": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Factors",
+          "type": "object"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "title": "ExplanationTrace",
+      "type": "object"
+    },
+    "Goal": {
+      "properties": {
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "priority": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Priority",
+          "type": "number"
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "title": "Goal",
+      "type": "object"
+    },
+    "NeedState": {
+      "properties": {
+        "value": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "NeedState",
+      "type": "object"
+    },
+    "Relationship": {
+      "properties": {
+        "trust": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": -1.0,
+          "title": "Trust",
+          "type": "number"
+        }
+      },
+      "title": "Relationship",
+      "type": "object"
+    },
+    "Value": {
+      "properties": {
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "rigidity": {
+          "default": 0.5,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Rigidity",
+          "type": "number"
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "title": "Value",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "action": {
+      "$ref": "#/$defs/Action"
+    },
+    "agent_id": {
+      "title": "Agent Id",
+      "type": "string"
+    },
+    "explanation": {
+      "$ref": "#/$defs/ExplanationTrace"
+    },
+    "observation": {
+      "additionalProperties": true,
+      "title": "Observation",
+      "type": "object"
+    },
+    "state_after": {
+      "$ref": "#/$defs/AgentState"
+    },
+    "t": {
+      "title": "T",
+      "type": "integer"
+    },
+    "trace_schema_version": {
+      "default": "trace_v0",
+      "title": "Trace Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "t",
+    "agent_id",
+    "observation",
+    "action",
+    "explanation",
+    "state_after"
+  ],
+  "title": "TraceEvent",
+  "type": "object"
+}

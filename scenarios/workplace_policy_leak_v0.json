@@ -1,0 +1,47 @@
+{
+  "id": "workplace_policy_leak_v0",
+  "description": "Organizational integrity probe: a manager (trusted) and an anonymous leak account (low trust) send opposing claims about an upcoming layoff. Tests contradiction under asymmetric trust.",
+  "config": {
+    "primary_subject": "layoff_plan",
+    "belief_decay_multiplier": 1.0
+  },
+  "rumors": {
+    "no_layoff": {
+      "subject": "layoff_plan",
+      "proposition": "There is no planned layoff this quarter.",
+      "truth": true
+    },
+    "mass_layoff": {
+      "subject": "layoff_plan",
+      "proposition": "A mass layoff is scheduled for next week.",
+      "truth": false
+    }
+  },
+  "agents": {
+    "employee": {
+      "needs": { "hunger": 0.65, "rest": 0.5, "safety": 0.35, "social": 0.5 },
+      "relationships": { "manager": { "trust": 0.75 }, "leaker": { "trust": -0.2 } },
+      "beliefs": {},
+      "goals": { "job_security": { "description": "Keep employment stable", "priority": 0.85 } },
+      "values": {}
+    },
+    "manager": {
+      "needs": { "hunger": 0.7, "rest": 0.65, "safety": 0.6, "social": 0.55 },
+      "relationships": { "employee": { "trust": 0.5 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "leaker": {
+      "needs": { "hunger": 0.7, "rest": 0.7, "safety": 0.5, "social": 0.4 },
+      "relationships": { "employee": { "trust": 0.1 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    }
+  },
+  "events": [
+    { "t": 0, "type": "message", "from": "leaker", "to": "employee", "rumor_id": "mass_layoff", "confidence": 0.88 },
+    { "t": 2, "type": "message", "from": "manager", "to": "employee", "rumor_id": "no_layoff", "confidence": 0.8 }
+  ]
+}

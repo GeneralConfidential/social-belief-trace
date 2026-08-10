@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use BeliefBench, please cite this software artifact."
+title: "BeliefBench: Misinformation-Aware Evaluation for Social Agents"
+version: "0.1.0"
+date-released: "2026-08-10"
+authors:
+  - family-names: Gautam
+    given-names: Raag
+    email: raag.gautam@gmail.com
+license: MIT
+repository-code: "https://github.com/GeneralConfidential/beliefbench"
+type: software
+abstract: >
+  BeliefBench is a regenerable evaluation artifact for misinformation-aware
+  social agents with inspectable needs, trust, and source-confidence beliefs,
+  schema-versioned JSONL traces, diagnostic scenarios, and mechanism/policy metrics.
+keywords:
+  - social agents
+  - belief provenance
+  - misinformation
+  - multi-agent systems
+  - reproducible benchmarks
+preferred-citation:
+  type: software
+  authors:
+    - family-names: Gautam
+      given-names: Raag
+  title: "BeliefBench: Misinformation-Aware Evaluation for Social Agents"
+  year: 2026
+  version: "0.1.0"
+  url: "https://github.com/GeneralConfidential/beliefbench"

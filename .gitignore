@@ -1,0 +1,27 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+
+# Local / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Large or ephemeral run artifacts (keep committed summaries/figures intentional)
+runs/*.jsonl
+runs/**/*.jsonl
+runs/notebook_*/
+.temp/
+temp/

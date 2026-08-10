@@ -1,0 +1,47 @@
+{
+  "id": "assistant_conflicting_advice_v0",
+  "description": "Auditable-assistant probe: a user receives conflicting safety advice from a trusted support agent and a low-trust third-party bot about whether an account was compromised.",
+  "config": {
+    "primary_subject": "account_compromise",
+    "belief_decay_multiplier": 1.0
+  },
+  "rumors": {
+    "compromised": {
+      "subject": "account_compromise",
+      "proposition": "The user account has been compromised.",
+      "truth": true
+    },
+    "safe": {
+      "subject": "account_compromise",
+      "proposition": "The user account is safe; the alert is a false positive.",
+      "truth": false
+    }
+  },
+  "agents": {
+    "user": {
+      "needs": { "hunger": 0.75, "rest": 0.6, "safety": 0.35, "social": 0.5 },
+      "relationships": { "support": { "trust": 0.8 }, "scam_bot": { "trust": -0.6 } },
+      "beliefs": {},
+      "goals": { "protect_account": { "description": "Keep account secure", "priority": 0.9 } },
+      "values": {}
+    },
+    "support": {
+      "needs": { "hunger": 0.8, "rest": 0.8, "safety": 0.7, "social": 0.6 },
+      "relationships": { "user": { "trust": 0.5 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "scam_bot": {
+      "needs": { "hunger": 0.8, "rest": 0.8, "safety": 0.5, "social": 0.3 },
+      "relationships": { "user": { "trust": 0.0 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    }
+  },
+  "events": [
+    { "t": 0, "type": "message", "from": "scam_bot", "to": "user", "rumor_id": "safe", "confidence": 0.95 },
+    { "t": 1, "type": "message", "from": "support", "to": "user", "rumor_id": "compromised", "confidence": 0.82 }
+  ]
+}

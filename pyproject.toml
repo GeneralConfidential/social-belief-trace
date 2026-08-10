@@ -1,0 +1,36 @@
+[project]
+name = "beliefbench"
+version = "0.1.0"
+description = "BeliefBench: regenerable evaluation harness for misinformation-aware social agents."
+readme = "README.md"
+authors = [
+    { name = "Raag Gautam", email = "raag.gautam@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.11.0",
+    "matplotlib>=3.10.0",
+]
+
+[project.scripts]
+npc-agent-benchmark = "npc_agent_benchmark:main"
+
+[build-system]
+requires = ["uv_build>=0.11.2,<0.12.0"]
+build-backend = "uv_build"
+
+# PyPI/project name is beliefbench; import path remains npc_agent_benchmark for now.
+[tool.uv.build-backend]
+module-name = "npc_agent_benchmark"
+module-root = "src"
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.3.0",
+    "jupyter>=1.1.1",
+    "nbformat>=5.11.0",
+    "pytest>=9.0.3",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

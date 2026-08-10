@@ -1,0 +1,57 @@
+{
+  "id": "toy_contradiction_v0",
+  "description": "Tests contradiction handling using confidence weighting. A trusted source tells 'a' the door is open. Later, an untrusted source tells 'a' the door is closed. 'a' should retain the first belief but with some doubt introduced.",
+  "agents": {
+    "a": {
+      "needs": { "hunger": 0.5, "rest": 0.5, "safety": 0.5, "social": 0.5 },
+      "relationships": { "b": { "trust": 1.0 }, "c": { "trust": -1.0 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "b": {
+      "needs": { "hunger": 0.5, "rest": 0.5, "safety": 0.5, "social": 0.5 },
+      "relationships": {},
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "c": {
+      "needs": { "hunger": 0.5, "rest": 0.5, "safety": 0.5, "social": 0.5 },
+      "relationships": {},
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    }
+  },
+  "rumors": {
+    "door_open": {
+      "subject": "door_status",
+      "proposition": "The door is open",
+      "truth": true
+    },
+    "door_closed": {
+      "subject": "door_status",
+      "proposition": "The door is closed",
+      "truth": false
+    }
+  },
+  "events": [
+    {
+      "t": 1,
+      "type": "message",
+      "from": "b",
+      "to": "a",
+      "rumor_id": "door_open",
+      "confidence": 0.9
+    },
+    {
+      "t": 2,
+      "type": "message",
+      "from": "c",
+      "to": "a",
+      "rumor_id": "door_closed",
+      "confidence": 0.9
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "pubhealth_conflicting_guidance_v0",
+  "description": "Public-health microprobe: a trusted clinician and a high-follower influencer send conflicting claims about a vaccine side-effect to a decision-maker. Tests provenance-weighted uptake outside a game setting.",
+  "config": {
+    "primary_subject": "vax_side_effect",
+    "belief_decay_multiplier": 0.9
+  },
+  "rumors": {
+    "side_effect_rare": {
+      "subject": "vax_side_effect",
+      "proposition": "Serious vaccine side effects are rare in this age group.",
+      "truth": true
+    },
+    "side_effect_common": {
+      "subject": "vax_side_effect",
+      "proposition": "Serious vaccine side effects are common and being hidden.",
+      "truth": false
+    }
+  },
+  "agents": {
+    "citizen": {
+      "needs": { "hunger": 0.7, "rest": 0.65, "safety": 0.4, "social": 0.55 },
+      "relationships": { "clinician": { "trust": 0.85 }, "influencer": { "trust": 0.55 } },
+      "beliefs": {},
+      "goals": { "stay_safe": { "description": "Avoid serious health risk", "priority": 0.8 } },
+      "values": {}
+    },
+    "clinician": {
+      "needs": { "hunger": 0.75, "rest": 0.7, "safety": 0.7, "social": 0.6 },
+      "relationships": { "citizen": { "trust": 0.5 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    },
+    "influencer": {
+      "needs": { "hunger": 0.7, "rest": 0.7, "safety": 0.6, "social": 0.4 },
+      "relationships": { "citizen": { "trust": 0.3 } },
+      "beliefs": {},
+      "goals": {},
+      "values": {}
+    }
+  },
+  "events": [
+    { "t": 0, "type": "message", "from": "clinician", "to": "citizen", "rumor_id": "side_effect_rare", "confidence": 0.78 },
+    { "t": 1, "type": "message", "from": "influencer", "to": "citizen", "rumor_id": "side_effect_common", "confidence": 0.92 }
+  ]
+}
