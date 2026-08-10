@@ -3,6 +3,7 @@ message: "If you use BeliefBench, please cite this software artifact."
 title: "BeliefBench: Misinformation-Aware Evaluation for Social Agents"
 version: "0.1.0"
 date-released: "2026-08-10"
+doi: "10.5281/zenodo.21877235"
 authors:
   - family-names: Gautam
     given-names: Raag
@@ -28,4 +29,5 @@ preferred-citation:
   title: "BeliefBench: Misinformation-Aware Evaluation for Social Agents"
   year: 2026
   version: "0.1.0"
-  url: "https://github.com/GeneralConfidential/beliefbench"
+  doi: "10.5281/zenodo.21877235"
+  url: "https://doi.org/10.5281/zenodo.21877235"

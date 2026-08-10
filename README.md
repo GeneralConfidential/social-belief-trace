@@ -1,5 +1,7 @@
 # BeliefBench
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21877235.svg)](https://doi.org/10.5281/zenodo.21877235)
+
 Evaluation harness for misinformation-aware social agents: inspectable needs, trust, and source-confidence beliefs.
 
 The package ships schema-versioned JSONL traces (`trace_v0`), diagnostic scenarios, and metrics for trust drift, calibration, source sensitivity, and related checks. Bundled agents are small symbolic baselines used to validate the harness and ablations—not a claim of social-intelligence SOTA.
@@ -60,7 +62,8 @@ Environment: Python 3.12+ via `uv` (`pyproject.toml` / `uv.lock`). Paths in summ
 
 ## Citation
 
-See `CITATION.cff`. Zenodo DOI will be added when the software deposit is published.
+Archived release: [https://doi.org/10.5281/zenodo.21877235](https://doi.org/10.5281/zenodo.21877235) (`v0.1.0`).  
+See also `CITATION.cff`.
 
 ## License
 
