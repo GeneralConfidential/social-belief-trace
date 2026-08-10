@@ -3,7 +3,15 @@ message: "If you use BeliefBench, please cite this software artifact."
 title: "BeliefBench: Misinformation-Aware Evaluation for Social Agents"
 version: "0.1.0"
 date-released: "2026-08-10"
-doi: "10.5281/zenodo.21877235"
+# Concept DOI (always points at the latest Zenodo version of this record).
+doi: "10.5281/zenodo.21877234"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21877234"
+    description: Concept DOI (latest version)
+  - type: doi
+    value: "10.5281/zenodo.21877235"
+    description: Version DOI for v0.1.0
 authors:
   - family-names: Gautam
     given-names: Raag
@@ -29,5 +37,6 @@ preferred-citation:
   title: "BeliefBench: Misinformation-Aware Evaluation for Social Agents"
   year: 2026
   version: "0.1.0"
-  doi: "10.5281/zenodo.21877235"
-  url: "https://doi.org/10.5281/zenodo.21877235"
+  # Prefer the concept DOI in generic citations; pin 21877235 when citing v0.1.0 specifically.
+  doi: "10.5281/zenodo.21877234"
+  url: "https://doi.org/10.5281/zenodo.21877234"

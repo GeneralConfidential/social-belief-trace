@@ -1,6 +1,6 @@
 # BeliefBench
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21877235.svg)](https://doi.org/10.5281/zenodo.21877235)
+[![DOI](https://zenodo.org/badge/1329153233.svg)](https://doi.org/10.5281/zenodo.21877234)
 
 Evaluation harness for misinformation-aware social agents: inspectable needs, trust, and source-confidence beliefs.
 
@@ -62,7 +62,12 @@ Environment: Python 3.12+ via `uv` (`pyproject.toml` / `uv.lock`). Paths in summ
 
 ## Citation
 
-Archived release: [https://doi.org/10.5281/zenodo.21877235](https://doi.org/10.5281/zenodo.21877235) (`v0.1.0`).  
+**Concept DOI** (always resolves to the latest Zenodo version):  
+[https://doi.org/10.5281/zenodo.21877234](https://doi.org/10.5281/zenodo.21877234)
+
+**This release (`v0.1.0`):**  
+[https://doi.org/10.5281/zenodo.21877235](https://doi.org/10.5281/zenodo.21877235)
+
 See also `CITATION.cff`.
 
 ## License
