@@ -16,7 +16,7 @@ The package ships schema-versioned JSONL traces (`trace_v0`), diagnostic scenari
 | `schemas/` | JSON Schema for `trace_v0` |
 | `runs/` | Summaries / figures (regenerate locally) |
 | `tests/` | Pytest suite |
-| `notebooks/` | Getting-started notebook |
+| `notebooks/` | [`getting_started.ipynb`](notebooks/getting_started.ipynb) — walkthrough + basic harness checks |
 | `ADAPTER_EXAMPLE.md` | How to plug in an external non-LLM policy |
 
 ## Quickstart
@@ -25,6 +25,18 @@ The package ships schema-versioned JSONL traces (`trace_v0`), diagnostic scenari
 uv sync --group dev
 uv run npc-agent-benchmark --scenario scenarios/toy_scarcity_v0.json --out runs/toy_scarcity_v0.jsonl --ticks 60 --seed 1
 ```
+
+### Notebook
+
+[`notebooks/getting_started.ipynb`](notebooks/getting_started.ipynb) imports the installed package, explains the harness/policy split, runs any scenario, and includes a few basic checks (trace schema, stub policy, registered modes).
+
+```bash
+uv sync --group dev
+uv run python scripts/run_notebooks.py getting_started
+# or: uv run jupyter lab notebooks/getting_started.ipynb
+```
+
+Use the project `.venv` as the Jupyter kernel. See [`notebooks/README.md`](notebooks/README.md) for setup tips.
 
 Regenerate tables, figures, schema export, and validation:
 
@@ -37,13 +49,6 @@ Smoke test and unit tests:
 ```bash
 uv run python scripts/smoke_test.py
 uv run pytest
-```
-
-Optional notebook:
-
-```bash
-uv sync --group dev
-uv run python scripts/run_notebooks.py getting_started
 ```
 
 Expected full regeneration is under about a minute on a typical laptop CPU.
