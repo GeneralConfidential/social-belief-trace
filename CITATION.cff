@@ -3,15 +3,18 @@ message: "If you use SocialBeliefTrace, please cite this software artifact."
 title: "SocialBeliefTrace: Inspectable Belief Provenance for Misinformation-Aware Social Agents"
 version: "0.2.0"
 date-released: "2026-08-16"
-# Concept DOI (always points at the latest Zenodo version of this record).
+# Software concept DOI (always points at the latest Zenodo version of this record).
 doi: "10.5281/zenodo.21877234"
 identifiers:
   - type: doi
     value: "10.5281/zenodo.21877234"
-    description: Concept DOI (latest version)
+    description: Software concept DOI (latest version)
   - type: doi
     value: "10.5281/zenodo.21877235"
-    description: Version DOI for v0.1.0 (released as BeliefBench)
+    description: Software version DOI for v0.1.0 (released as BeliefBench)
+  - type: doi
+    value: "10.5281/zenodo.21937731"
+    description: Companion preprint concept DOI
 authors:
   - family-names: Gautam
     given-names: Raag
@@ -41,3 +44,12 @@ preferred-citation:
   # Prefer the concept DOI in generic citations; pin 21877235 when citing v0.1.0 specifically.
   doi: "10.5281/zenodo.21877234"
   url: "https://doi.org/10.5281/zenodo.21877234"
+references:
+  - type: article
+    authors:
+      - family-names: Gautam
+        given-names: Raag
+    title: "SocialBeliefTrace: Inspectable Belief Provenance for Misinformation-Aware Social Agents"
+    year: 2026
+    doi: "10.5281/zenodo.21937731"
+    url: "https://doi.org/10.5281/zenodo.21937731"
