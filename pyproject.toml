@@ -1,7 +1,7 @@
 [project]
-name = "beliefbench"
-version = "0.1.0"
-description = "BeliefBench: regenerable evaluation harness for misinformation-aware social agents."
+name = "social-belief-trace"
+version = "0.2.0"
+description = "SocialBeliefTrace: regenerable evaluation harness for misinformation-aware social agents."
 readme = "README.md"
 authors = [
     { name = "Raag Gautam", email = "raag.gautam@gmail.com" }
@@ -19,7 +19,7 @@ npc-agent-benchmark = "npc_agent_benchmark:main"
 requires = ["uv_build>=0.11.2,<0.12.0"]
 build-backend = "uv_build"
 
-# PyPI/project name is beliefbench; import path remains npc_agent_benchmark for now.
+# PyPI/project name is social-belief-trace; import path remains npc_agent_benchmark for now.
 [tool.uv.build-backend]
 module-name = "npc_agent_benchmark"
 module-root = "src"

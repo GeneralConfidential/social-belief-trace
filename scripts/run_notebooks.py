@@ -1,6 +1,6 @@
-# Launch Jupyter Lab for BeliefBench notebooks.
+# Launch Jupyter Lab for SocialBeliefTrace notebooks.
 #
-# Usage (from beliefbench/):
+# Usage (from social-belief-trace/):
 #   uv sync --group dev
 #   uv run python scripts/run_notebooks.py
 #   uv run python scripts/run_notebooks.py getting_started
@@ -18,7 +18,7 @@ NB_DIR = BB_ROOT / "notebooks"
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Open BeliefBench notebooks in Jupyter Lab.")
+    parser = argparse.ArgumentParser(description="Open SocialBeliefTrace notebooks in Jupyter Lab.")
     parser.add_argument(
         "which",
         nargs="?",

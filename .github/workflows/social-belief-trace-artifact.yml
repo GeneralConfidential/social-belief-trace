@@ -1,5 +1,5 @@
-# BeliefBench CI: smoke + regenerate + pytest (Ubuntu, uv).
-name: beliefbench artifact
+# SocialBeliefTrace CI: smoke + regenerate + pytest (Ubuntu, uv).
+name: social-belief-trace artifact
 
 on:
   push:

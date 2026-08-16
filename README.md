@@ -1,4 +1,4 @@
-# BeliefBench
+# SocialBeliefTrace
 
 [![DOI](https://zenodo.org/badge/1329153233.svg)](https://doi.org/10.5281/zenodo.21877234)
 
@@ -70,8 +70,9 @@ Environment: Python 3.12+ via `uv` (`pyproject.toml` / `uv.lock`). Paths in summ
 **Concept DOI** (always resolves to the latest Zenodo version):  
 [https://doi.org/10.5281/zenodo.21877234](https://doi.org/10.5281/zenodo.21877234)
 
-**This release (`v0.1.0`):**  
-[https://doi.org/10.5281/zenodo.21877235](https://doi.org/10.5281/zenodo.21877235)
+**This release (`v0.2.0`):** cite the concept DOI until the Zenodo version DOI is issued.
+
+Formerly released as **BeliefBench** `v0.1.0` ([https://doi.org/10.5281/zenodo.21877235](https://doi.org/10.5281/zenodo.21877235)). That name is independently used by Dixon's BeliefBench (LLM belief elicitation).
 
 See also `CITATION.cff`.
 

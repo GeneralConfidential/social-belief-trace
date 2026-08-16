@@ -7,9 +7,9 @@
 ## Setup
 
 ```bash
-cd beliefbench
+cd social-belief-trace
 uv sync --group dev
-uv run python -m ipykernel install --user --name=beliefbench --display-name="BeliefBench (uv)"
+uv run python -m ipykernel install --user --name=social-belief-trace --display-name="SocialBeliefTrace (uv)"
 ```
 
 ## Run
@@ -20,4 +20,4 @@ uv run python scripts/run_notebooks.py getting_started
 uv run jupyter lab notebooks/getting_started.ipynb
 ```
 
-Select the project `.venv` (or the **BeliefBench (uv)** kernel) when prompted.
+Select the project `.venv` (or the **SocialBeliefTrace (uv)** kernel) when prompted.

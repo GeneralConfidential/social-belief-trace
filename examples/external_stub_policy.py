@@ -3,7 +3,7 @@
 The class now lives in the package as ``npc_agent_benchmark.baselines.external_stub.ExternalStubAgent``.
 It is registered under ``policy_mode="external_stub"`` (see ``VARIANTS`` in ``scripts/run_all_agg.py``).
 
-Smoke-import from ``beliefbench/``::
+Smoke-import from ``social-belief-trace/``::
 
     uv run python examples/external_stub_policy.py
 """

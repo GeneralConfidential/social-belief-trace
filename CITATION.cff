@@ -1,8 +1,8 @@
 cff-version: 1.2.0
-message: "If you use BeliefBench, please cite this software artifact."
-title: "BeliefBench: Misinformation-Aware Evaluation for Social Agents"
-version: "0.1.0"
-date-released: "2026-08-10"
+message: "If you use SocialBeliefTrace, please cite this software artifact."
+title: "SocialBeliefTrace: Inspectable Belief Provenance for Misinformation-Aware Social Agents"
+version: "0.2.0"
+date-released: "2026-08-16"
 # Concept DOI (always points at the latest Zenodo version of this record).
 doi: "10.5281/zenodo.21877234"
 identifiers:
@@ -11,18 +11,19 @@ identifiers:
     description: Concept DOI (latest version)
   - type: doi
     value: "10.5281/zenodo.21877235"
-    description: Version DOI for v0.1.0
+    description: Version DOI for v0.1.0 (released as BeliefBench)
 authors:
   - family-names: Gautam
     given-names: Raag
     email: raag.gautam@gmail.com
 license: MIT
-repository-code: "https://github.com/GeneralConfidential/beliefbench"
+repository-code: "https://github.com/GeneralConfidential/social-belief-trace"
 type: software
 abstract: >
-  BeliefBench is a regenerable evaluation artifact for misinformation-aware
+  SocialBeliefTrace is a regenerable evaluation artifact for misinformation-aware
   social agents with inspectable needs, trust, and source-confidence beliefs,
   schema-versioned JSONL traces, diagnostic scenarios, and mechanism/policy metrics.
+  Formerly released as BeliefBench v0.1.0.
 keywords:
   - social agents
   - belief provenance
@@ -34,9 +35,9 @@ preferred-citation:
   authors:
     - family-names: Gautam
       given-names: Raag
-  title: "BeliefBench: Misinformation-Aware Evaluation for Social Agents"
+  title: "SocialBeliefTrace: Inspectable Belief Provenance for Misinformation-Aware Social Agents"
   year: 2026
-  version: "0.1.0"
+  version: "0.2.0"
   # Prefer the concept DOI in generic citations; pin 21877235 when citing v0.1.0 specifically.
   doi: "10.5281/zenodo.21877234"
   url: "https://doi.org/10.5281/zenodo.21877234"
