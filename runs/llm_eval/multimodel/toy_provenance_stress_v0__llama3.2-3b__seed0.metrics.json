@@ -1,0 +1,20 @@
+{
+  "action_kind_counts": {
+    "rest": 70
+  },
+  "avg_trust_drift_abs": 0.10541644382725437,
+  "backend": "ollama",
+  "belief_accuracy": 0.6410256410256411,
+  "belief_brier": 0.24514270385521428,
+  "belief_spread_fraction": null,
+  "gossip_count": 0,
+  "gossip_rate_per_event": 0.0,
+  "help_stranger_rate_per_peer_event": null,
+  "llm_invalid_action_rate": 0.6571428571428571,
+  "model_id": "llama3.2-3b",
+  "model_label": "llama3.2-3b",
+  "scenario_id": "toy_provenance_stress_v0",
+  "seed": 0,
+  "trust_conf_pearson_r": 0.9570752898618734,
+  "trust_conf_pearson_r_n": 64
+}

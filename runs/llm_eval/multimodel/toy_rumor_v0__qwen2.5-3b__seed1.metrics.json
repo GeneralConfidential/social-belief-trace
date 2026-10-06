@@ -1,0 +1,22 @@
+{
+  "action_kind_counts": {
+    "gossip": 9,
+    "help_stranger": 6,
+    "rest": 15
+  },
+  "avg_trust_drift_abs": 0.009099999999999983,
+  "backend": "ollama",
+  "belief_accuracy": 1.0,
+  "belief_brier": 0.11066058834124566,
+  "belief_spread_fraction": null,
+  "gossip_count": 9,
+  "gossip_rate_per_event": 0.3,
+  "help_stranger_rate_per_peer_event": 0.2,
+  "llm_invalid_action_rate": 0.0,
+  "model_id": "qwen2.5:3b-instruct",
+  "model_label": "qwen2.5-3b",
+  "scenario_id": "toy_rumor_v0",
+  "seed": 1,
+  "trust_conf_pearson_r": null,
+  "trust_conf_pearson_r_n": 2
+}

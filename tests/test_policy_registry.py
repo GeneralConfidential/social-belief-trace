@@ -12,6 +12,8 @@ from npc_agent_benchmark.models import TraceEvent
 def test_registered_modes_cover_runner_surface() -> None:
     assert "external_stub" in REGISTERED_POLICY_MODES
     assert "utility_only" in REGISTERED_POLICY_MODES
+    assert "llm_local" in REGISTERED_POLICY_MODES
+    assert "llm_openai" in REGISTERED_POLICY_MODES
 
 
 def test_unknown_policy_raises() -> None:
@@ -28,6 +30,11 @@ def test_mixed_policy_first_routine() -> None:
 def test_external_stub_agent_constructible() -> None:
     agent = build_agent("external_stub", agent_id="x", index=0, seed=42, enable_rumor_channel=True)
     assert agent.__class__.__name__ == "ExternalStubAgent"
+
+
+def test_llm_local_agent_constructible() -> None:
+    agent = build_agent("llm_local", agent_id="x", index=0, seed=42, enable_rumor_channel=True)
+    assert agent.__class__.__name__ == "ConstrainedLlmAgent"
 
 
 def test_trace_line_roundtrips_pydantic() -> None:

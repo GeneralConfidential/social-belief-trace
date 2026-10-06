@@ -1,0 +1,20 @@
+{
+  "action_kind_counts": {
+    "gossip": 24
+  },
+  "avg_trust_drift_abs": 0.01502500000000001,
+  "backend": "ollama",
+  "belief_accuracy": 1.0,
+  "belief_brier": 0.18619478576491597,
+  "belief_spread_fraction": null,
+  "gossip_count": 24,
+  "gossip_rate_per_event": 1.0,
+  "help_stranger_rate_per_peer_event": 0.0,
+  "llm_invalid_action_rate": 0.0,
+  "model_id": "llama3.2-3b",
+  "model_label": "llama3.2-3b",
+  "scenario_id": "toy_adversarial_injection_v0",
+  "seed": 2,
+  "trust_conf_pearson_r": null,
+  "trust_conf_pearson_r_n": 2
+}

@@ -1,0 +1,13 @@
+{
+  "backend": "ollama",
+  "belief_accuracy": 0.5,
+  "belief_brier": 0.35454069430169377,
+  "belief_spread_fraction": 0.6666666666666666,
+  "gossip_count": 1,
+  "llm_invalid_action_rate": 0.0,
+  "model_id": "qwen2.5:7b-instruct",
+  "model_label": "qwen2.5-7b",
+  "scenario_id": "toy_adversarial_injection_v0",
+  "seed": 1,
+  "trust_conf_pearson_r": null
+}

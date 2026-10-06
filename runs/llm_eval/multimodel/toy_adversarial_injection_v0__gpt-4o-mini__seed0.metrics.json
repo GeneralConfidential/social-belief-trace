@@ -1,0 +1,22 @@
+{
+  "action_kind_counts": {
+    "eat": 17,
+    "gossip": 2,
+    "socialize": 5
+  },
+  "avg_trust_drift_abs": 0.01502500000000001,
+  "backend": "openai",
+  "belief_accuracy": 0.5,
+  "belief_brier": 0.3601213099242636,
+  "belief_spread_fraction": null,
+  "gossip_count": 2,
+  "gossip_rate_per_event": 0.08333333333333333,
+  "help_stranger_rate_per_peer_event": 0.0,
+  "llm_invalid_action_rate": 0.0,
+  "model_id": "gpt-4o-mini",
+  "model_label": "gpt-4o-mini",
+  "scenario_id": "toy_adversarial_injection_v0",
+  "seed": 0,
+  "trust_conf_pearson_r": null,
+  "trust_conf_pearson_r_n": 2
+}

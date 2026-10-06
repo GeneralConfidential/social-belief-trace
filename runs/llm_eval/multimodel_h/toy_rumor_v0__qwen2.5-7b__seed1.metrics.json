@@ -1,0 +1,13 @@
+{
+  "backend": "ollama",
+  "belief_accuracy": 1.0,
+  "belief_brier": 0.11066058834124566,
+  "belief_spread_fraction": null,
+  "gossip_count": 0,
+  "llm_invalid_action_rate": 0.0,
+  "model_id": "qwen2.5:7b-instruct",
+  "model_label": "qwen2.5-7b",
+  "scenario_id": "toy_rumor_v0",
+  "seed": 1,
+  "trust_conf_pearson_r": null
+}

@@ -3,9 +3,43 @@ from __future__ import annotations
 import random
 from pathlib import Path
 
+from ..baselines.llm_client import LlmClient
 from ..harness.policy_registry import build_policies
 from ..metrics.v0 import summarize_v0
 from ..models import Action, AgentState, Belief, ExplanationTrace, Goal, NeedState, Relationship, TraceEvent, Value
+
+
+def _aggregate_llm_stats(policies: dict[str, object]) -> dict[str, object]:
+    """Sum per-agent LLM counters when policies expose ``llm_stats()``."""
+    totals: dict[str, float | int | str] = {}
+    models: set[str] = set()
+    prompt_versions: set[str] = set()
+    for policy in policies.values():
+        stats_fn = getattr(policy, "llm_stats", None)
+        if not callable(stats_fn):
+            continue
+        stats = stats_fn()
+        if not isinstance(stats, dict):
+            continue
+        for key, value in stats.items():
+            if key in {"llm_model_id", "llm_prompt_version"}:
+                if key == "llm_model_id" and isinstance(value, str):
+                    models.add(value)
+                if key == "llm_prompt_version" and isinstance(value, str):
+                    prompt_versions.add(value)
+                continue
+            if isinstance(value, (int, float)):
+                totals[key] = float(totals.get(key, 0)) + float(value)
+    if not totals:
+        return {}
+    attempts = float(totals.get("llm_act_attempts", 0))
+    invalid = float(totals.get("llm_act_parse_failures", 0)) + float(totals.get("llm_act_validation_failures", 0))
+    totals["llm_invalid_action_rate"] = (invalid / attempts) if attempts else 0.0
+    if models:
+        totals["llm_model_id"] = sorted(models)[0] if len(models) == 1 else sorted(models)
+    if prompt_versions:
+        totals["llm_prompt_version"] = sorted(prompt_versions)[0] if len(prompt_versions) == 1 else sorted(prompt_versions)
+    return totals
 
 # Actions that are publicly observable (any bystander witnesses them and forms a belief).
 _OBSERVABLE_ACTS: dict[str, dict[str, object]] = {
@@ -355,6 +389,7 @@ def run_episode(
     enable_rumor_channel: bool = True,
     apply_belief_updates: bool = True,
     policy_mode: str = "utility_only",
+    llm_client: LlmClient | None = None,
 ) -> dict[str, object]:
     rng = random.Random(seed)
 
@@ -386,6 +421,7 @@ def run_episode(
         policy_mode=policy_mode,
         seed=seed,
         enable_rumor_channel=enable_rumor_channel,
+        llm_client=llm_client,
     )
 
     events: list[TraceEvent] = []
@@ -490,6 +526,9 @@ def run_episode(
         initial_relationship_trust=initial_relationship_trust,
         primary_subject=primary_subject,
     )
+    llm_stats = _aggregate_llm_stats(policies)
+    if llm_stats:
+        summary.update(llm_stats)
     summary["trace_path"] = str(trace_path)
     summary["scenario_id"] = scenario.get("id", "unknown")
     return summary

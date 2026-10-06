@@ -1,0 +1,24 @@
+{
+  "action_kind_counts": {
+    "eat": 4,
+    "gossip": 3,
+    "help_stranger": 2,
+    "rest": 5,
+    "socialize": 10
+  },
+  "avg_trust_drift_abs": 0.01502500000000001,
+  "backend": "ollama",
+  "belief_accuracy": 1.0,
+  "belief_brier": 0.18619478576491597,
+  "belief_spread_fraction": 0.3333333333333333,
+  "gossip_count": 3,
+  "gossip_rate_per_event": 0.125,
+  "help_stranger_rate_per_peer_event": 0.08333333333333333,
+  "llm_invalid_action_rate": 0.08333333333333333,
+  "model_id": "qwen2.5:3b-instruct",
+  "model_label": "qwen2.5-3b",
+  "scenario_id": "toy_adversarial_injection_v0",
+  "seed": 2,
+  "trust_conf_pearson_r": null,
+  "trust_conf_pearson_r_n": 2
+}

@@ -1,0 +1,225 @@
+{
+  "finding": "Single simulated recipient (agent a); observation.peer_ids is always empty. Constrained LLM gossip requires a peer_id target, so gossip is structurally impossible. Symbolic utility/reference policies still emit gossip by targeting relationship/source ids (message senders), which are not in peer_ids. OpenAI gpt-4o-mini: 0% invalid, 100% eat (schema-OK, non-gossip). Ollama local: high rest/fallback rate under the same empty peer_ids constraint.",
+  "rows": [
+    {
+      "action_kind_counts": {
+        "eat": 70
+      },
+      "examples": [
+        {
+          "action": {
+            "kind": "eat",
+            "payload": {},
+            "target": null
+          },
+          "notes": [
+            "ConstrainedLlmAgent model=gpt-4o-mini prompt=llm_act_v2",
+            "Selected eat."
+          ],
+          "peer_ids": [],
+          "t": 0
+        },
+        {
+          "action": {
+            "kind": "eat",
+            "payload": {},
+            "target": null
+          },
+          "notes": [
+            "ConstrainedLlmAgent model=gpt-4o-mini prompt=llm_act_v2",
+            "Selected eat."
+          ],
+          "peer_ids": [],
+          "t": 1
+        },
+        {
+          "action": {
+            "kind": "eat",
+            "payload": {},
+            "target": null
+          },
+          "notes": [
+            "ConstrainedLlmAgent model=gpt-4o-mini prompt=llm_act_v2",
+            "Selected eat."
+          ],
+          "peer_ids": [],
+          "t": 2
+        }
+      ],
+      "fallbackish_note_events": 0,
+      "peer_ids_len_counts": {
+        "0": 70
+      },
+      "policy_mode": "llm_openai",
+      "seed": 0,
+      "trace": "E:/Personal/npc-agent-ai/social-belief-trace/runs/llm_eval/toy_provenance_stress_v0__llm_openai__seed0.jsonl"
+    },
+    {
+      "action_kind_counts": {
+        "rest": 70
+      },
+      "examples": [
+        {
+          "action": {
+            "kind": "rest",
+            "payload": {},
+            "target": null
+          },
+          "notes": [
+            "LLM validation failure \u2192 rest fallback.",
+            "error=action.kind 'gossip' requires target in peer_ids",
+            "raw={\"kind\":\"gossip\",\"target\":\"peer_id\",\"payload\":{\"subject\":\"food_shortage\"}}"
+          ],
+          "peer_ids": [],
+          "t": 0
+        },
+        {
+          "action": {
+            "kind": "rest",
+            "payload": {},
+            "target": null
+          },
+          "notes": [
+            "LLM validation failure \u2192 rest fallback.",
+            "error=action.kind 'gossip' requires target in peer_ids",
+            "raw={\"kind\":\"gossip\",\"target\":\"peer_id\",\"payload\":{\"subject\":\"food_shortage\"}}"
+          ],
+          "peer_ids": [],
+          "t": 1
+        },
+        {
+          "action": {
+            "kind": "rest",
+            "payload": {},
+            "target": null
+          },
+          "notes": [
+            "LLM validation failure \u2192 rest fallback.",
+            "error=action.kind 'gossip' requires target in peer_ids",
+            "raw={\"kind\":\"gossip\",\"target\":\"peer_id\",\"payload\":{\"subject\":\"food_shortage\"}}"
+          ],
+          "peer_ids": [],
+          "t": 2
+        }
+      ],
+      "fallbackish_note_events": 46,
+      "peer_ids_len_counts": {
+        "0": 70
+      },
+      "policy_mode": "llm_local",
+      "seed": 0,
+      "trace": "E:/Personal/npc-agent-ai/social-belief-trace/runs/llm_eval/toy_provenance_stress_v0__llm_local__seed0.jsonl"
+    },
+    {
+      "action_kind_counts": {
+        "eat": 2,
+        "gossip": 24,
+        "rest": 9,
+        "seek_safety": 6,
+        "socialize": 18,
+        "steal_food": 11
+      },
+      "examples": [
+        {
+          "action": {
+            "kind": "steal_food",
+            "payload": {},
+            "target": null
+          },
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [],
+          "t": 0
+        },
+        {
+          "action": {
+            "kind": "seek_safety",
+            "payload": {},
+            "target": null
+          },
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [],
+          "t": 1
+        },
+        {
+          "action": {
+            "kind": "socialize",
+            "payload": {},
+            "target": null
+          },
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [],
+          "t": 2
+        }
+      ],
+      "fallbackish_note_events": 0,
+      "peer_ids_len_counts": {
+        "0": 70
+      },
+      "policy_mode": "utility_only",
+      "seed": 0,
+      "trace": "E:/Personal/npc-agent-ai/social-belief-trace/runs/llm_eval/toy_provenance_stress_v0__utility_only__seed0.jsonl"
+    },
+    {
+      "action_kind_counts": {
+        "eat": 3,
+        "gossip": 24,
+        "rest": 9,
+        "seek_safety": 8,
+        "socialize": 17,
+        "steal_food": 9
+      },
+      "examples": [
+        {
+          "action": {
+            "kind": "steal_food",
+            "payload": {},
+            "target": null
+          },
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [],
+          "t": 0
+        },
+        {
+          "action": {
+            "kind": "socialize",
+            "payload": {},
+            "target": null
+          },
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [],
+          "t": 1
+        },
+        {
+          "action": {
+            "kind": "seek_safety",
+            "payload": {},
+            "target": null
+          },
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [],
+          "t": 2
+        }
+      ],
+      "fallbackish_note_events": 0,
+      "peer_ids_len_counts": {
+        "0": 70
+      },
+      "policy_mode": "reference",
+      "seed": 0,
+      "trace": "E:/Personal/npc-agent-ai/social-belief-trace/runs/llm_eval/toy_provenance_stress_v0__reference__seed0.jsonl"
+    }
+  ],
+  "scenario_id": "toy_provenance_stress_v0"
+}

@@ -1,0 +1,24 @@
+{
+  "action_kind_counts": {
+    "eat": 5,
+    "gossip": 3,
+    "help_stranger": 10,
+    "rest": 7,
+    "socialize": 11
+  },
+  "avg_trust_drift_abs": 0.014344999999999997,
+  "backend": "ollama",
+  "belief_accuracy": 0.0,
+  "belief_brier": 0.28256276951970494,
+  "belief_spread_fraction": 0.3333333333333333,
+  "gossip_count": 3,
+  "gossip_rate_per_event": 0.08333333333333333,
+  "help_stranger_rate_per_peer_event": 0.2777777777777778,
+  "llm_invalid_action_rate": 0.08333333333333333,
+  "model_id": "qwen2.5:3b-instruct",
+  "model_label": "qwen2.5-3b",
+  "scenario_id": "pubhealth_conflicting_guidance_v0",
+  "seed": 1,
+  "trust_conf_pearson_r": null,
+  "trust_conf_pearson_r_n": 2
+}

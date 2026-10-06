@@ -1,0 +1,42 @@
+[
+  {
+    "gossip_count_mean": 0.0,
+    "gossip_rate_per_event_mean": 0.0,
+    "llm_act_fallbacks_mean": 0.0,
+    "llm_act_successes_mean": 70.0,
+    "llm_invalid_action_rate_mean": 0.0,
+    "n_seeds": 3,
+    "prompt_version": "llm_act_v2",
+    "scenario_id": "toy_provenance_stress_v0"
+  },
+  {
+    "gossip_count_mean": 0.0,
+    "gossip_rate_per_event_mean": 0.0,
+    "llm_act_fallbacks_mean": 0.0,
+    "llm_act_successes_mean": 70.0,
+    "llm_invalid_action_rate_mean": 0.0,
+    "n_seeds": 3,
+    "prompt_version": "llm_act_v2_needfirst",
+    "scenario_id": "toy_provenance_stress_v0"
+  },
+  {
+    "gossip_count_mean": 9.0,
+    "gossip_rate_per_event_mean": 0.3,
+    "llm_act_fallbacks_mean": 0.0,
+    "llm_act_successes_mean": 30.0,
+    "llm_invalid_action_rate_mean": 0.0,
+    "n_seeds": 3,
+    "prompt_version": "llm_act_v2",
+    "scenario_id": "toy_rumor_v0"
+  },
+  {
+    "gossip_count_mean": 3.3333333333333335,
+    "gossip_rate_per_event_mean": 0.1111111111111111,
+    "llm_act_fallbacks_mean": 0.0,
+    "llm_act_successes_mean": 30.0,
+    "llm_invalid_action_rate_mean": 0.0,
+    "n_seeds": 3,
+    "prompt_version": "llm_act_v2_needfirst",
+    "scenario_id": "toy_rumor_v0"
+  }
+]

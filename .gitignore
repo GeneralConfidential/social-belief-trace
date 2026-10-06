@@ -18,6 +18,7 @@ Thumbs.db
 *.swp
 .idea/
 .vscode/
+.env
 
 # Large or ephemeral run artifacts (keep committed summaries/figures intentional)
 runs/*.jsonl

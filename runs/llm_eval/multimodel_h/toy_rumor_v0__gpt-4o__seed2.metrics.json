@@ -1,0 +1,13 @@
+{
+  "backend": "openai",
+  "belief_accuracy": 1.0,
+  "belief_brier": 0.10660664361735407,
+  "belief_spread_fraction": null,
+  "gossip_count": 0,
+  "llm_invalid_action_rate": 0.0,
+  "model_id": "gpt-4o",
+  "model_label": "gpt-4o",
+  "scenario_id": "toy_rumor_v0",
+  "seed": 2,
+  "trust_conf_pearson_r": null
+}

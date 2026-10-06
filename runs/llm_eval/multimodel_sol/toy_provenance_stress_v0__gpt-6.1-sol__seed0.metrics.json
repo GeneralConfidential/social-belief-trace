@@ -1,0 +1,13 @@
+{
+  "backend": "openai",
+  "belief_accuracy": 0.6410256410256411,
+  "belief_brier": 0.24514270385521428,
+  "belief_spread_fraction": null,
+  "gossip_count": 0,
+  "llm_invalid_action_rate": 0.11428571428571428,
+  "model_id": "gpt-6.1-sol",
+  "model_label": "gpt-6.1-sol",
+  "scenario_id": "toy_provenance_stress_v0",
+  "seed": 0,
+  "trust_conf_pearson_r": 0.9570752898618734
+}

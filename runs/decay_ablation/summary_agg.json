@@ -1,0 +1,38 @@
+[
+  {
+    "belief_accuracy_mean": 0.909090909090909,
+    "belief_brier_mean": 0.1027063356174545,
+    "belief_conf_delta_avg_mean": 0.0,
+    "belief_count_mean": 11.0,
+    "belief_decay_multiplier": 0.0,
+    "belief_total_final_mean": 11.0,
+    "gossip_count_mean": 18.6,
+    "n_seeds": 5,
+    "policy_mode": "utility_only",
+    "scenario_id": "toy_rumor_v0"
+  },
+  {
+    "belief_accuracy_mean": 0.909090909090909,
+    "belief_brier_mean": 0.12451193814265857,
+    "belief_conf_delta_avg_mean": -0.004738211070117637,
+    "belief_count_mean": 11.0,
+    "belief_decay_multiplier": 1.0,
+    "belief_total_final_mean": 11.0,
+    "gossip_count_mean": 18.8,
+    "n_seeds": 5,
+    "policy_mode": "utility_only",
+    "scenario_id": "toy_rumor_v0"
+  },
+  {
+    "belief_accuracy_mean": 0.7272727272727273,
+    "belief_brier_mean": 0.21383042601688448,
+    "belief_conf_delta_avg_mean": -0.0190056484429903,
+    "belief_count_mean": 11.0,
+    "belief_decay_multiplier": 4.0,
+    "belief_total_final_mean": 11.0,
+    "gossip_count_mean": 17.4,
+    "n_seeds": 5,
+    "policy_mode": "utility_only",
+    "scenario_id": "toy_rumor_v0"
+  }
+]

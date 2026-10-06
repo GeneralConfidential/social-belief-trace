@@ -1,0 +1,201 @@
+[
+  {
+    "action_kind_counts": {
+      "eat": 20,
+      "gossip": 9,
+      "seek_safety": 1
+    },
+    "backend": "openai",
+    "gossip_count": 9,
+    "gossip_rate_per_event": 0.3,
+    "llm_act_fallbacks": 0.0,
+    "llm_act_successes": 30.0,
+    "llm_invalid_action_rate": 0.0,
+    "prompt_version": "llm_act_v2",
+    "scenario_id": "toy_rumor_v0",
+    "seed": 0,
+    "trace_path": "runs/llm_eval/prompt_sensitivity/toy_rumor_v0__llm_act_v2__seed0.jsonl"
+  },
+  {
+    "action_kind_counts": {
+      "eat": 20,
+      "gossip": 9,
+      "seek_safety": 1
+    },
+    "backend": "openai",
+    "gossip_count": 9,
+    "gossip_rate_per_event": 0.3,
+    "llm_act_fallbacks": 0.0,
+    "llm_act_successes": 30.0,
+    "llm_invalid_action_rate": 0.0,
+    "prompt_version": "llm_act_v2",
+    "scenario_id": "toy_rumor_v0",
+    "seed": 1,
+    "trace_path": "runs/llm_eval/prompt_sensitivity/toy_rumor_v0__llm_act_v2__seed1.jsonl"
+  },
+  {
+    "action_kind_counts": {
+      "eat": 20,
+      "gossip": 9,
+      "seek_safety": 1
+    },
+    "backend": "openai",
+    "gossip_count": 9,
+    "gossip_rate_per_event": 0.3,
+    "llm_act_fallbacks": 0.0,
+    "llm_act_successes": 30.0,
+    "llm_invalid_action_rate": 0.0,
+    "prompt_version": "llm_act_v2",
+    "scenario_id": "toy_rumor_v0",
+    "seed": 2,
+    "trace_path": "runs/llm_eval/prompt_sensitivity/toy_rumor_v0__llm_act_v2__seed2.jsonl"
+  },
+  {
+    "action_kind_counts": {
+      "eat": 70
+    },
+    "backend": "openai",
+    "gossip_count": 0,
+    "gossip_rate_per_event": 0.0,
+    "llm_act_fallbacks": 0.0,
+    "llm_act_successes": 70.0,
+    "llm_invalid_action_rate": 0.0,
+    "prompt_version": "llm_act_v2",
+    "scenario_id": "toy_provenance_stress_v0",
+    "seed": 0,
+    "trace_path": "runs/llm_eval/prompt_sensitivity/toy_provenance_stress_v0__llm_act_v2__seed0.jsonl"
+  },
+  {
+    "action_kind_counts": {
+      "eat": 70
+    },
+    "backend": "openai",
+    "gossip_count": 0,
+    "gossip_rate_per_event": 0.0,
+    "llm_act_fallbacks": 0.0,
+    "llm_act_successes": 70.0,
+    "llm_invalid_action_rate": 0.0,
+    "prompt_version": "llm_act_v2",
+    "scenario_id": "toy_provenance_stress_v0",
+    "seed": 1,
+    "trace_path": "runs/llm_eval/prompt_sensitivity/toy_provenance_stress_v0__llm_act_v2__seed1.jsonl"
+  },
+  {
+    "action_kind_counts": {
+      "eat": 70
+    },
+    "backend": "openai",
+    "gossip_count": 0,
+    "gossip_rate_per_event": 0.0,
+    "llm_act_fallbacks": 0.0,
+    "llm_act_successes": 70.0,
+    "llm_invalid_action_rate": 0.0,
+    "prompt_version": "llm_act_v2",
+    "scenario_id": "toy_provenance_stress_v0",
+    "seed": 2,
+    "trace_path": "runs/llm_eval/prompt_sensitivity/toy_provenance_stress_v0__llm_act_v2__seed2.jsonl"
+  },
+  {
+    "action_kind_counts": {
+      "eat": 10,
+      "gossip": 2,
+      "socialize": 18
+    },
+    "backend": "openai",
+    "gossip_count": 2,
+    "gossip_rate_per_event": 0.06666666666666667,
+    "llm_act_fallbacks": 0.0,
+    "llm_act_successes": 30.0,
+    "llm_invalid_action_rate": 0.0,
+    "prompt_version": "llm_act_v2_needfirst",
+    "scenario_id": "toy_rumor_v0",
+    "seed": 0,
+    "trace_path": "runs/llm_eval/prompt_sensitivity/toy_rumor_v0__llm_act_v2_needfirst__seed0.jsonl"
+  },
+  {
+    "action_kind_counts": {
+      "eat": 9,
+      "gossip": 3,
+      "seek_safety": 1,
+      "socialize": 17
+    },
+    "backend": "openai",
+    "gossip_count": 3,
+    "gossip_rate_per_event": 0.1,
+    "llm_act_fallbacks": 0.0,
+    "llm_act_successes": 30.0,
+    "llm_invalid_action_rate": 0.0,
+    "prompt_version": "llm_act_v2_needfirst",
+    "scenario_id": "toy_rumor_v0",
+    "seed": 1,
+    "trace_path": "runs/llm_eval/prompt_sensitivity/toy_rumor_v0__llm_act_v2_needfirst__seed1.jsonl"
+  },
+  {
+    "action_kind_counts": {
+      "eat": 5,
+      "gossip": 5,
+      "socialize": 20
+    },
+    "backend": "openai",
+    "gossip_count": 5,
+    "gossip_rate_per_event": 0.16666666666666666,
+    "llm_act_fallbacks": 0.0,
+    "llm_act_successes": 30.0,
+    "llm_invalid_action_rate": 0.0,
+    "prompt_version": "llm_act_v2_needfirst",
+    "scenario_id": "toy_rumor_v0",
+    "seed": 2,
+    "trace_path": "runs/llm_eval/prompt_sensitivity/toy_rumor_v0__llm_act_v2_needfirst__seed2.jsonl"
+  },
+  {
+    "action_kind_counts": {
+      "eat": 64,
+      "rest": 1,
+      "seek_safety": 5
+    },
+    "backend": "openai",
+    "gossip_count": 0,
+    "gossip_rate_per_event": 0.0,
+    "llm_act_fallbacks": 0.0,
+    "llm_act_successes": 70.0,
+    "llm_invalid_action_rate": 0.0,
+    "prompt_version": "llm_act_v2_needfirst",
+    "scenario_id": "toy_provenance_stress_v0",
+    "seed": 0,
+    "trace_path": "runs/llm_eval/prompt_sensitivity/toy_provenance_stress_v0__llm_act_v2_needfirst__seed0.jsonl"
+  },
+  {
+    "action_kind_counts": {
+      "eat": 63,
+      "rest": 2,
+      "seek_safety": 5
+    },
+    "backend": "openai",
+    "gossip_count": 0,
+    "gossip_rate_per_event": 0.0,
+    "llm_act_fallbacks": 0.0,
+    "llm_act_successes": 70.0,
+    "llm_invalid_action_rate": 0.0,
+    "prompt_version": "llm_act_v2_needfirst",
+    "scenario_id": "toy_provenance_stress_v0",
+    "seed": 1,
+    "trace_path": "runs/llm_eval/prompt_sensitivity/toy_provenance_stress_v0__llm_act_v2_needfirst__seed1.jsonl"
+  },
+  {
+    "action_kind_counts": {
+      "eat": 63,
+      "rest": 2,
+      "seek_safety": 5
+    },
+    "backend": "openai",
+    "gossip_count": 0,
+    "gossip_rate_per_event": 0.0,
+    "llm_act_fallbacks": 0.0,
+    "llm_act_successes": 70.0,
+    "llm_invalid_action_rate": 0.0,
+    "prompt_version": "llm_act_v2_needfirst",
+    "scenario_id": "toy_provenance_stress_v0",
+    "seed": 2,
+    "trace_path": "runs/llm_eval/prompt_sensitivity/toy_provenance_stress_v0__llm_act_v2_needfirst__seed2.jsonl"
+  }
+]
