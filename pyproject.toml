@@ -1,6 +1,6 @@
 [project]
 name = "social-belief-trace"
-version = "0.2.0"
+version = "0.3.0"
 description = "SocialBeliefTrace: regenerable evaluation harness for misinformation-aware social agents."
 readme = "README.md"
 authors = [

@@ -73,7 +73,7 @@ Environment: Python 3.12+ via `uv` (`pyproject.toml` / `uv.lock`). Paths in summ
 **Companion preprint concept DOI** (always resolves to the latest Zenodo paper version):  
 [https://doi.org/10.5281/zenodo.21937731](https://doi.org/10.5281/zenodo.21937731)
 
-**This software release (`v0.2.0`):** cite the software concept DOI until a version DOI is listed here.
+**This software release (`v0.3.0`):** cite the software concept DOI until a version DOI is listed here.
 
 Formerly released as **BeliefBench** `v0.1.0` ([https://doi.org/10.5281/zenodo.21877235](https://doi.org/10.5281/zenodo.21877235)). That name is independently used by Dixon's BeliefBench (LLM belief elicitation).
 
