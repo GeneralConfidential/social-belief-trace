@@ -60,8 +60,11 @@ uv sync --group dev
 uv run python scripts/smoke_test.py
 uv run python scripts/regenerate.py
 uv run python scripts/validate_outputs.py
+uv run python scripts/_verify_paper_tables.py
 uv run pytest
 ```
+
+Paper LLM table numbers are checked against committed `runs/llm_eval/**/summary_*.json` (see `scripts/_verify_paper_tables.py`). `regenerate.py` preserves those summaries; opt-in LLM reruns are documented in `LLM_POLICY.md`.
 
 Environment: Python 3.12+ via `uv` (`pyproject.toml` / `uv.lock`). Paths in summary JSON are relative to this folder.
 
