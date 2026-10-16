@@ -1,4 +1,7 @@
-"""Plot Brier vs gossip fingerprint for RQ6 LLM vs symbolic heads."""
+"""Plot Brier vs gossip fingerprint for RQ6 LLM vs symbolic heads.
+
+Three panels so provenance-stress gossip is not mixed into a fair ranking.
+"""
 
 from __future__ import annotations
 
@@ -51,71 +54,77 @@ def main() -> None:
     root = Path(__file__).resolve().parents[1]
     points = []
     points.extend(_load_means(root / "runs" / "llm_eval" / "summary_raw_openai.json", backend_label="openai"))
-    # Prefer openai symbolic+llm for the primary scatter; add local LLM rumor/pubhealth only.
     ollama = _load_means(root / "runs" / "llm_eval" / "summary_raw.json", backend_label="ollama")
     points.extend([p for p in ollama if p["policy_mode"] == "llm_local"])
 
     fig_dir = root / "runs" / "figures"
     fig_dir.mkdir(parents=True, exist_ok=True)
 
-    markers = {
-        "toy_rumor_v0": "o",
-        "pubhealth_conflicting_guidance_v0": "s",
-        "toy_provenance_stress_v0": "^",
-    }
     colors = {
         "llm_openai": "#1f77b4",
         "llm_local": "#ff7f0e",
         "utility_only": "#2ca02c",
         "reference": "#9467bd",
     }
-    labels_done: set[str] = set()
+    short_pol = {
+        "llm_openai": "gpt-4o-mini",
+        "llm_local": "ollama-3B",
+        "utility_only": "utility",
+        "reference": "reference",
+    }
+    panels = [
+        ("toy_rumor_v0", "Rumor (shared gossip targets)", False),
+        ("pubhealth_conflicting_guidance_v0", "Pubhealth (shared gossip targets)", False),
+        ("toy_provenance_stress_v0", "Provenance stress (unequal targets)", True),
+    ]
 
-    fig, ax = plt.subplots(figsize=(5.2, 3.8))
-    for p in points:
-        g = p["gossip_mean"]
-        b = p["brier_mean"]
-        if not isinstance(g, float) or not isinstance(b, float):
+    fig, axes = plt.subplots(1, 3, figsize=(9.4, 3.15), sharey=True)
+    legend_done: set[str] = set()
+    for ax, (sid, title, unequal) in zip(axes, panels, strict=True):
+        for p in points:
+            if p["scenario_id"] != sid:
+                continue
+            g = p["gossip_mean"]
+            b = p["brier_mean"]
+            if not isinstance(g, float) or not isinstance(b, float):
+                continue
+            pol = str(p["policy_mode"])
+            lab = short_pol.get(pol, pol)
+            use_lab = lab if lab not in legend_done else None
+            if use_lab:
+                legend_done.add(lab)
+            ax.scatter(
+                g,
+                b,
+                c=colors.get(pol, "gray"),
+                s=55,
+                label=use_lab,
+                edgecolors="black",
+                linewidths=0.4,
+                zorder=3,
+            )
+        ax.set_title(title, fontsize=8)
+        ax.set_xlabel("Mean gossip count", fontsize=8)
+        ax.grid(True, alpha=0.3)
+        if unequal:
+            ax.set_facecolor("#f6f6f6")
+    axes[0].set_ylabel("Mean Brier (retained labeled beliefs)", fontsize=8)
+    handles, labels = [], []
+    for ax in axes:
+        h, lab = ax.get_legend_handles_labels()
+        handles.extend(h)
+        labels.extend(lab)
+    # Deduplicate legend labels while preserving order.
+    seen: set[str] = set()
+    uniq_h, uniq_l = [], []
+    for h, lab in zip(handles, labels, strict=True):
+        if lab in seen:
             continue
-        pol = str(p["policy_mode"])
-        sid = str(p["scenario_id"])
-        legend = f"{pol}/{sid.split('_')[1] if '_' in sid else sid}"
-        # Shorter legend keys
-        short = {
-            ("llm_openai", "toy_rumor_v0"): "gpt-4o-mini / rumor",
-            ("llm_openai", "pubhealth_conflicting_guidance_v0"): "gpt-4o-mini / pubhealth",
-            ("llm_openai", "toy_provenance_stress_v0"): "gpt-4o-mini / stress",
-            ("llm_local", "toy_rumor_v0"): "ollama-3B / rumor",
-            ("llm_local", "pubhealth_conflicting_guidance_v0"): "ollama-3B / pubhealth",
-            ("llm_local", "toy_provenance_stress_v0"): "ollama-3B / stress",
-            ("utility_only", "toy_rumor_v0"): "utility / rumor",
-            ("utility_only", "pubhealth_conflicting_guidance_v0"): "utility / pubhealth",
-            ("utility_only", "toy_provenance_stress_v0"): "utility / stress",
-            ("reference", "toy_rumor_v0"): "reference / rumor",
-            ("reference", "pubhealth_conflicting_guidance_v0"): "reference / pubhealth",
-            ("reference", "toy_provenance_stress_v0"): "reference / stress",
-        }.get((pol, sid), f"{pol}/{sid}")
-        lab = short if short not in labels_done else None
-        if lab:
-            labels_done.add(short)
-        ax.scatter(
-            g,
-            b,
-            c=colors.get(pol, "gray"),
-            marker=markers.get(sid, "o"),
-            s=55,
-            label=lab,
-            edgecolors="black",
-            linewidths=0.4,
-            zorder=3,
-        )
-
-    ax.set_xlabel("Mean gossip count")
-    ax.set_ylabel("Mean Brier (truth-labeled beliefs)")
-    ax.set_title("RQ6 fingerprint: Brier vs gossip")
-    ax.grid(True, alpha=0.3)
-    ax.legend(fontsize=7, loc="best", framealpha=0.9)
-    fig.tight_layout()
+        seen.add(lab)
+        uniq_h.append(h)
+        uniq_l.append(lab)
+    fig.legend(uniq_h, uniq_l, loc="upper center", ncol=4, fontsize=7, framealpha=0.95)
+    fig.tight_layout(rect=(0, 0, 1, 0.88))
     out = fig_dir / "fig3_brier_vs_gossip_rq6.png"
     fig.savefig(out, dpi=200)
     plt.close(fig)
