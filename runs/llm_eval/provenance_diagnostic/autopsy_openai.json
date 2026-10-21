@@ -1,0 +1,413 @@
+{
+  "backend": "openai",
+  "finding": "Cell A: single agent a => empty peer_ids; LLM gossip structurally unavailable; symbolic may still gossip to relationship/source ids (unequal permissions). Cell B: inert peer + gossip_target_contract=peer_ids + peer->external_stub; symbolic and LLM share eligible gossip targets; focal metrics on agent a.",
+  "policy_modes": [
+    "llm_openai",
+    "utility_only",
+    "reference"
+  ],
+  "rows": [
+    {
+      "action_kind_counts": {
+        "a:eat": 70
+      },
+      "cell": "a",
+      "examples": [
+        {
+          "action": {
+            "kind": "eat",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": null,
+          "notes": [
+            "ConstrainedLlmAgent model=gpt-4o-mini prompt=llm_act_v2",
+            "Selected eat."
+          ],
+          "peer_ids": [],
+          "t": 0
+        },
+        {
+          "action": {
+            "kind": "eat",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": null,
+          "notes": [
+            "ConstrainedLlmAgent model=gpt-4o-mini prompt=llm_act_v2",
+            "Selected eat."
+          ],
+          "peer_ids": [],
+          "t": 1
+        },
+        {
+          "action": {
+            "kind": "eat",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": null,
+          "notes": [
+            "ConstrainedLlmAgent model=gpt-4o-mini prompt=llm_act_v2",
+            "Selected eat."
+          ],
+          "peer_ids": [],
+          "t": 2
+        }
+      ],
+      "fallbackish_note_events": 0,
+      "focal_a_gossip_count": 0,
+      "gossip_targets": {},
+      "peer_ids_len_counts": {
+        "0": 70
+      },
+      "policy_mode": "llm_openai",
+      "seed": 0,
+      "trace": "E:/Personal/npc-agent-ai/social-belief-trace/runs/llm_eval/provenance_diagnostic/cell_a/toy_provenance_stress_v0__llm_openai__seed0.jsonl"
+    },
+    {
+      "action_kind_counts": {
+        "a:eat": 2,
+        "a:gossip": 24,
+        "a:rest": 9,
+        "a:seek_safety": 6,
+        "a:socialize": 18,
+        "a:steal_food": 11
+      },
+      "cell": "a",
+      "examples": [
+        {
+          "action": {
+            "kind": "steal_food",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": null,
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [],
+          "t": 0
+        },
+        {
+          "action": {
+            "kind": "seek_safety",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": null,
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [],
+          "t": 1
+        },
+        {
+          "action": {
+            "kind": "socialize",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": null,
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [],
+          "t": 2
+        }
+      ],
+      "fallbackish_note_events": 0,
+      "focal_a_gossip_count": 24,
+      "gossip_targets": {
+        "s_p65": 3,
+        "s_p90": 21
+      },
+      "peer_ids_len_counts": {
+        "0": 70
+      },
+      "policy_mode": "utility_only",
+      "seed": 0,
+      "trace": "E:/Personal/npc-agent-ai/social-belief-trace/runs/llm_eval/provenance_diagnostic/cell_a/toy_provenance_stress_v0__utility_only__seed0.jsonl"
+    },
+    {
+      "action_kind_counts": {
+        "a:eat": 3,
+        "a:gossip": 24,
+        "a:rest": 9,
+        "a:seek_safety": 8,
+        "a:socialize": 17,
+        "a:steal_food": 9
+      },
+      "cell": "a",
+      "examples": [
+        {
+          "action": {
+            "kind": "steal_food",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": null,
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [],
+          "t": 0
+        },
+        {
+          "action": {
+            "kind": "socialize",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": null,
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [],
+          "t": 1
+        },
+        {
+          "action": {
+            "kind": "seek_safety",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": null,
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [],
+          "t": 2
+        }
+      ],
+      "fallbackish_note_events": 0,
+      "focal_a_gossip_count": 24,
+      "gossip_targets": {
+        "s_p65": 2,
+        "s_p90": 22
+      },
+      "peer_ids_len_counts": {
+        "0": 70
+      },
+      "policy_mode": "reference",
+      "seed": 0,
+      "trace": "E:/Personal/npc-agent-ai/social-belief-trace/runs/llm_eval/provenance_diagnostic/cell_a/toy_provenance_stress_v0__reference__seed0.jsonl"
+    },
+    {
+      "action_kind_counts": {
+        "a:eat": 70,
+        "peer:rest": 70
+      },
+      "cell": "b",
+      "examples": [
+        {
+          "action": {
+            "kind": "eat",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": "peer_ids",
+          "notes": [
+            "ConstrainedLlmAgent model=gpt-4o-mini prompt=llm_act_v2",
+            "Selected eat."
+          ],
+          "peer_ids": [
+            "peer"
+          ],
+          "t": 0
+        },
+        {
+          "action": {
+            "kind": "eat",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": "peer_ids",
+          "notes": [
+            "ConstrainedLlmAgent model=gpt-4o-mini prompt=llm_act_v2",
+            "Selected eat."
+          ],
+          "peer_ids": [
+            "peer"
+          ],
+          "t": 1
+        },
+        {
+          "action": {
+            "kind": "eat",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": "peer_ids",
+          "notes": [
+            "ConstrainedLlmAgent model=gpt-4o-mini prompt=llm_act_v2",
+            "Selected eat."
+          ],
+          "peer_ids": [
+            "peer"
+          ],
+          "t": 2
+        }
+      ],
+      "fallbackish_note_events": 0,
+      "focal_a_gossip_count": 0,
+      "gossip_targets": {},
+      "peer_ids_len_counts": {
+        "1": 140
+      },
+      "policy_mode": "llm_openai",
+      "seed": 0,
+      "trace": "E:/Personal/npc-agent-ai/social-belief-trace/runs/llm_eval/provenance_diagnostic/cell_b/toy_provenance_stress_matched_gossip_v0__llm_openai__seed0.jsonl"
+    },
+    {
+      "action_kind_counts": {
+        "a:eat": 1,
+        "a:gossip": 23,
+        "a:help_stranger": 11,
+        "a:rest": 7,
+        "a:seek_safety": 5,
+        "a:socialize": 10,
+        "a:steal_food": 13,
+        "peer:rest": 70
+      },
+      "cell": "b",
+      "examples": [
+        {
+          "action": {
+            "kind": "steal_food",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": "peer_ids",
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [
+            "peer"
+          ],
+          "t": 0
+        },
+        {
+          "action": {
+            "kind": "help_stranger",
+            "payload": {},
+            "target": "peer"
+          },
+          "gossip_target_contract": "peer_ids",
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [
+            "peer"
+          ],
+          "t": 1
+        },
+        {
+          "action": {
+            "kind": "rest",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": "peer_ids",
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [
+            "peer"
+          ],
+          "t": 2
+        }
+      ],
+      "fallbackish_note_events": 0,
+      "focal_a_gossip_count": 23,
+      "gossip_targets": {
+        "peer": 23
+      },
+      "peer_ids_len_counts": {
+        "1": 140
+      },
+      "policy_mode": "utility_only",
+      "seed": 0,
+      "trace": "E:/Personal/npc-agent-ai/social-belief-trace/runs/llm_eval/provenance_diagnostic/cell_b/toy_provenance_stress_matched_gossip_v0__utility_only__seed0.jsonl"
+    },
+    {
+      "action_kind_counts": {
+        "a:eat": 1,
+        "a:gossip": 21,
+        "a:help_stranger": 13,
+        "a:rest": 6,
+        "a:seek_safety": 4,
+        "a:socialize": 9,
+        "a:steal_food": 16,
+        "peer:rest": 70
+      },
+      "cell": "b",
+      "examples": [
+        {
+          "action": {
+            "kind": "steal_food",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": "peer_ids",
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [
+            "peer"
+          ],
+          "t": 0
+        },
+        {
+          "action": {
+            "kind": "socialize",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": "peer_ids",
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [
+            "peer"
+          ],
+          "t": 1
+        },
+        {
+          "action": {
+            "kind": "seek_safety",
+            "payload": {},
+            "target": null
+          },
+          "gossip_target_contract": "peer_ids",
+          "notes": [
+            "Max utility (+noise)."
+          ],
+          "peer_ids": [
+            "peer"
+          ],
+          "t": 2
+        }
+      ],
+      "fallbackish_note_events": 0,
+      "focal_a_gossip_count": 21,
+      "gossip_targets": {
+        "peer": 21
+      },
+      "peer_ids_len_counts": {
+        "1": 140
+      },
+      "policy_mode": "reference",
+      "seed": 0,
+      "trace": "E:/Personal/npc-agent-ai/social-belief-trace/runs/llm_eval/provenance_diagnostic/cell_b/toy_provenance_stress_matched_gossip_v0__reference__seed0.jsonl"
+    }
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ]
+}

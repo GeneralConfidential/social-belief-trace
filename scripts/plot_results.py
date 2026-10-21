@@ -87,17 +87,27 @@ def main() -> None:
 
     labels = [variant_labels[v] for v in variants]
 
-    plt.figure(figsize=(10.2, 4.0))
+    # Lettering sized for JAAMAS column/full-width placement (~8--12 pt at final size).
+    plt.rcParams.update(
+        {
+            "font.size": 11,
+            "axes.titlesize": 12,
+            "axes.labelsize": 11,
+            "xtick.labelsize": 10,
+            "ytick.labelsize": 10,
+        }
+    )
+    plt.figure(figsize=(10.2, 4.2))
     plt.bar(xs, [m or 0.0 for m in means], yerr=[s or 0.0 for s in stds], capsize=4)
     plt.xticks(xs, labels, rotation=0, ha="center")
     plt.title("Provenance stress: retained-belief Brier (not a policy ranking)")
     plt.ylabel("Brier score over retained final beliefs\n(lower is better; coverage differs by variant)")
     for i, m in enumerate(means):
         if m is None:
-            plt.text(i, 0.01, "no retained\nbeliefs", ha="center", va="bottom", fontsize=8)
+            plt.text(i, 0.01, "no retained\nbeliefs", ha="center", va="bottom", fontsize=9)
     plt.tight_layout()
     out1 = fig_dir / "fig1_brier_provenance_stress.png"
-    plt.savefig(out1, dpi=200)
+    plt.savefig(out1, dpi=300)
     plt.close()
 
     # Figure 2: source sensitivity r mean±std (when available).
@@ -106,7 +116,7 @@ def main() -> None:
     stds_r = [_std(r_by_variant[v]) for v in variants]
     means_rn = [_mean(r_n_by_variant[v]) for v in variants]
 
-    plt.figure(figsize=(10.2, 4.0))
+    plt.figure(figsize=(10.2, 4.2))
     # Use NaN for missing r so we don't visually imply "0 correlation".
     heights = [m if m is not None else math.nan for m in means_r]
     yerrs = [s if s is not None else 0.0 for s in stds_r]
@@ -120,10 +130,10 @@ def main() -> None:
     for i, (m, rn) in enumerate(zip(means_r, means_rn, strict=True)):
         if m is None:
             n_txt = f"n={int(rn) if rn is not None else 0}"
-            plt.text(i, 0.02, f"(suppressed)\n{n_txt}", ha="center", va="bottom", fontsize=7)
+            plt.text(i, 0.02, f"(suppressed)\n{n_txt}", ha="center", va="bottom", fontsize=9)
     plt.tight_layout()
     out2 = fig_dir / "fig2_source_sensitivity_provenance_stress.png"
-    plt.savefig(out2, dpi=200)
+    plt.savefig(out2, dpi=300)
     plt.close()
 
     print(f"Wrote: {out1}")

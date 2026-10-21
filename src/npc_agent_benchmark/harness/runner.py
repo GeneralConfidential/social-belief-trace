@@ -4,7 +4,7 @@ import random
 from pathlib import Path
 
 from ..baselines.llm_client import LlmClient
-from ..harness.policy_registry import build_policies
+from ..harness.policy_registry import build_agent, build_policies
 from ..metrics.v0 import summarize_v0
 from ..models import Action, AgentState, Belief, ExplanationTrace, Goal, NeedState, Relationship, TraceEvent, Value
 
@@ -407,6 +407,12 @@ def run_episode(
     need_decay_mult = float(cfg.get("need_passive_decay_multiplier", 1.0))
     primary_subject = cfg.get("primary_subject")
     primary_subject = str(primary_subject) if isinstance(primary_subject, str) else None
+    gossip_target_contract = cfg.get("gossip_target_contract")
+    gossip_target_contract = (
+        str(gossip_target_contract) if isinstance(gossip_target_contract, str) and gossip_target_contract else None
+    )
+    focal_raw = cfg.get("focal_agent_id")
+    focal_agent_id = str(focal_raw) if isinstance(focal_raw, str) and focal_raw else None
 
     states: dict[str, AgentState] = {aid: _init_state(aid, init) for aid, init in agents_spec.items()}
     # Scenario-initial relationship snapshot for trust-drift metrics.
@@ -423,6 +429,22 @@ def run_episode(
         enable_rumor_channel=enable_rumor_channel,
         llm_client=llm_client,
     )
+    overrides = cfg.get("policy_overrides")
+    if isinstance(overrides, dict):
+        for aid, override_mode in overrides.items():
+            if not isinstance(aid, str) or aid not in policies:
+                continue
+            if not isinstance(override_mode, str):
+                continue
+            index = agent_ids.index(aid)
+            policies[aid] = build_agent(
+                override_mode,
+                agent_id=aid,
+                index=index,
+                seed=seed,
+                enable_rumor_channel=enable_rumor_channel,
+                llm_client=llm_client if override_mode.startswith("llm_") else None,
+            )
 
     events: list[TraceEvent] = []
     trace_path.parent.mkdir(parents=True, exist_ok=True)
@@ -463,12 +485,14 @@ def run_episode(
                         apply_belief_updates=apply_belief_updates,
                     )
                 peer_ids = [x for x in agent_ids if x != aid]
-                obs = {
+                obs: dict[str, object] = {
                     "t": t,
                     "needs": {k: float(v.value) for k, v in state.needs.items()},
                     "messages": delivered,
                     "peer_ids": peer_ids,
                 }
+                if gossip_target_contract is not None:
+                    obs["gossip_target_contract"] = gossip_target_contract
 
                 action, expl = policies[aid].act(t=t, state=state, observation=obs)
                 if not isinstance(expl, ExplanationTrace):
@@ -525,11 +549,19 @@ def run_episode(
         events,
         initial_relationship_trust=initial_relationship_trust,
         primary_subject=primary_subject,
+        focal_agent_id=focal_agent_id,
     )
-    llm_stats = _aggregate_llm_stats(policies)
+    llm_policies = policies
+    if focal_agent_id is not None and focal_agent_id in policies:
+        llm_policies = {focal_agent_id: policies[focal_agent_id]}
+    llm_stats = _aggregate_llm_stats(llm_policies)
     if llm_stats:
         summary.update(llm_stats)
     summary["trace_path"] = str(trace_path)
     summary["scenario_id"] = scenario.get("id", "unknown")
+    if gossip_target_contract is not None:
+        summary["gossip_target_contract"] = gossip_target_contract
+    if focal_agent_id is not None:
+        summary["focal_agent_id"] = focal_agent_id
     return summary
 

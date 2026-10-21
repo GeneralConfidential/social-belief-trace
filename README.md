@@ -80,7 +80,7 @@ Environment: Python 3.12+ via `uv` (`pyproject.toml` / `uv.lock`). Paths in summ
 [https://doi.org/10.5281/zenodo.21937731](https://doi.org/10.5281/zenodo.21937731)
 
 **This preprint cut version DOI:**  
-[https://doi.org/10.5281/zenodo.23285783](https://doi.org/10.5281/zenodo.23285783)
+[https://doi.org/10.5281/zenodo.23424509](https://doi.org/10.5281/zenodo.23424509)
 
 Formerly released as **BeliefBench** `v0.1.0` ([https://doi.org/10.5281/zenodo.21877235](https://doi.org/10.5281/zenodo.21877235)). That name is independently used by Dixon's BeliefBench (LLM belief elicitation).
 

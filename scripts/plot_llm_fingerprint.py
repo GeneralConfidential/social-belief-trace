@@ -78,7 +78,7 @@ def main() -> None:
         ("toy_provenance_stress_v0", "Provenance stress (unequal targets)", True),
     ]
 
-    fig, axes = plt.subplots(1, 3, figsize=(9.4, 3.15), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(11.0, 3.6), sharey=True)
     legend_done: set[str] = set()
     for ax, (sid, title, unequal) in zip(axes, panels, strict=True):
         for p in points:
@@ -103,12 +103,13 @@ def main() -> None:
                 linewidths=0.4,
                 zorder=3,
             )
-        ax.set_title(title, fontsize=8)
-        ax.set_xlabel("Mean gossip count", fontsize=8)
+        ax.set_title(title, fontsize=11)
+        ax.set_xlabel("Mean gossip count", fontsize=10)
+        ax.tick_params(axis="both", labelsize=9)
         ax.grid(True, alpha=0.3)
         if unequal:
             ax.set_facecolor("#f6f6f6")
-    axes[0].set_ylabel("Mean Brier (retained labeled beliefs)", fontsize=8)
+    axes[0].set_ylabel("Mean Brier (retained labeled beliefs)", fontsize=10)
     handles, labels = [], []
     for ax in axes:
         h, lab = ax.get_legend_handles_labels()
@@ -123,10 +124,10 @@ def main() -> None:
         seen.add(lab)
         uniq_h.append(h)
         uniq_l.append(lab)
-    fig.legend(uniq_h, uniq_l, loc="upper center", ncol=4, fontsize=7, framealpha=0.95)
+    fig.legend(uniq_h, uniq_l, loc="upper center", ncol=4, fontsize=9, framealpha=0.95)
     fig.tight_layout(rect=(0, 0, 1, 0.88))
     out = fig_dir / "fig3_brier_vs_gossip_rq6.png"
-    fig.savefig(out, dpi=200)
+    fig.savefig(out, dpi=300)
     plt.close(fig)
     print(f"wrote {out}")
 

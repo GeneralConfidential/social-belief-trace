@@ -33,6 +33,7 @@ def summarize_v0(
     *,
     initial_relationship_trust: dict[str, dict[str, float]] | None = None,
     primary_subject: str | None = None,
+    focal_agent_id: str | None = None,
 ) -> dict[str, object]:
     if not events:
         return {"error": "no_events"}
@@ -41,6 +42,11 @@ def summarize_v0(
     final_by_agent: dict[str, TraceEvent] = {}
     for ev in events:
         final_by_agent[ev.agent_id] = ev
+
+    # Optional focal filter for communication / action-rate metrics (matched-gossip diagnostics).
+    action_events = (
+        [ev for ev in events if ev.agent_id == focal_agent_id] if focal_agent_id is not None else events
+    )
 
     avg_final_needs: dict[str, float] = {}
     n_agents = len(final_by_agent)
@@ -80,8 +86,8 @@ def summarize_v0(
     avg_trust_drift_abs = trust_drift_abs / trust_pairs if trust_pairs else 0.0
     avg_trust_drift_signed = trust_drift_signed / trust_pairs if trust_pairs else 0.0
 
-    # Action diversity: entropy-ish proxy via unique action kinds.
-    action_kinds = [ev.action.kind for ev in events]
+    # Action diversity: entropy-ish proxy via unique action kinds (focal-scoped when set).
+    action_kinds = [ev.action.kind for ev in action_events]
     counts = Counter(action_kinds)
     unique_kinds = len(counts)
 
@@ -104,10 +110,10 @@ def summarize_v0(
             if pred == bool(b.truth):
                 belief_acc_n += 1
 
-    # Aggregate uptake statistics across all delivered messages in the trace.
+    # Aggregate uptake statistics across delivered messages (focal-scoped when set).
     trust_samples: list[float] = []
     conf_samples: list[float] = []
-    for ev in events:
+    for ev in action_events:
         msgs = ev.observation.get("messages")
         if not isinstance(msgs, list):
             continue
@@ -138,14 +144,14 @@ def summarize_v0(
         "trust_conf_pearson_r_n": n_messages,
     }
 
-    n_events = len(events)
-    gossip_count = sum(1 for ev in events if ev.action.kind == "gossip")
+    n_events = len(action_events)
+    gossip_count = sum(1 for ev in action_events if ev.action.kind == "gossip")
     gossip_rate_per_event = gossip_count / n_events if n_events else None
 
-    help_stranger_count = sum(1 for ev in events if ev.action.kind == "help_stranger")
+    help_stranger_count = sum(1 for ev in action_events if ev.action.kind == "help_stranger")
     help_stranger_peer_events = sum(
         1
-        for ev in events
+        for ev in action_events
         if isinstance(ev.observation.get("peer_ids"), list) and len(ev.observation.get("peer_ids", [])) > 0
     )
     # Belief spread / subject diversity (final snapshot).
@@ -165,7 +171,7 @@ def summarize_v0(
     )
     value_break_count = sum(
         1
-        for ev in events
+        for ev in action_events
         if any(str(k).startswith("value_break:") for k in ev.explanation.factors.keys())
     )
     help_stranger_rate_per_event = help_stranger_count / n_events if n_events else None
@@ -178,7 +184,7 @@ def summarize_v0(
     # check that score ~= contrib_sum + noise (within tolerance).
     legible_n = 0
     legible_ok = 0
-    for ev in events:
+    for ev in action_events:
         factors = ev.explanation.factors
         if not isinstance(factors, dict):
             continue
@@ -272,5 +278,7 @@ def summarize_v0(
         "goal_completion_proxy": goal_proxy,
         "score_trace_arithmetic_validity": score_trace_arithmetic_validity,
         "belief_conf_delta_avg": belief_decay_avg_delta,
+        "focal_agent_id": focal_agent_id,
+        "focal_event_count": n_events if focal_agent_id is not None else None,
     }
 

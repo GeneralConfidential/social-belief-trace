@@ -23,6 +23,8 @@ Thumbs.db
 # Large or ephemeral run artifacts (keep committed summaries/figures intentional)
 runs/*.jsonl
 runs/**/*.jsonl
+# Exception: matched-permission diagnostic retains JSONL for audit
+!runs/llm_eval/provenance_diagnostic/**/*.jsonl
 runs/notebook_*/
 .temp/
 temp/

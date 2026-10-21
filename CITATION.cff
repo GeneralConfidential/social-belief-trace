@@ -19,8 +19,8 @@ identifiers:
     value: "10.5281/zenodo.21937731"
     description: Companion preprint concept DOI
   - type: doi
-    value: "10.5281/zenodo.23285783"
-    description: Companion preprint version DOI for the v0.3.1 PDF cut
+    value: "10.5281/zenodo.23424509"
+    description: Companion preprint version DOI for the v0.3.2 PDF cut
 authors:
   - family-names: Gautam
     given-names: Raag
@@ -63,6 +63,6 @@ references:
         affiliation: "Independent Researcher"
     title: "SocialBeliefTrace: Inspectable Belief Provenance for Misinformation-Aware Social Agents"
     year: 2026
-    # Prefer concept DOI 21937731 for “latest”; pin 23285783 for this preprint snapshot.
-    doi: "10.5281/zenodo.23285783"
-    url: "https://doi.org/10.5281/zenodo.23285783"
+    # Prefer concept DOI 21937731 for “latest”; pin 23424509 for this preprint snapshot.
+    doi: "10.5281/zenodo.23424509"
+    url: "https://doi.org/10.5281/zenodo.23424509"

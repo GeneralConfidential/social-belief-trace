@@ -13,6 +13,33 @@ class CandidateAction:
     factors: dict[str, float]
 
 
+def _observation_peer_ids(observation: dict[str, object]) -> list[str]:
+    raw = observation.get("peer_ids", [])
+    if not isinstance(raw, list):
+        return []
+    return [p for p in raw if isinstance(p, str)]
+
+
+def _eligible_gossip_targets(state: AgentState, observation: dict[str, object]) -> list[str]:
+    """Return relationship ids eligible as gossip targets.
+
+    Default (no contract): any relationship with trust >= 0 (legacy stress confound:
+    message-source ids can be targeted even when they are not agent peers).
+
+    When ``observation["gossip_target_contract"] == "peer_ids"``: only ids that appear
+    in ``observation["peer_ids"]`` and have trust >= 0 (matched with LLM validator).
+    """
+    contract = observation.get("gossip_target_contract")
+    if contract == "peer_ids":
+        peers = set(_observation_peer_ids(observation))
+        return [
+            rid
+            for rid, rel in state.relationships.items()
+            if rid in peers and float(rel.trust) >= 0.0
+        ]
+    return [rid for rid, rel in state.relationships.items() if float(rel.trust) >= 0.0]
+
+
 class BaseAgent:
     def __init__(self, agent_id: str, *, seed: int):
         self.agent_id = agent_id
@@ -151,23 +178,23 @@ class UtilityNoMemoryAgent(BaseAgent):
                 continue
 
             if act_kind == "gossip":
-                if not state.beliefs or not state.relationships:
+                if not state.beliefs:
                     continue
-                for rel_id, rel in state.relationships.items():
-                    if rel.trust >= 0.0:
-                        for b_id, b in state.beliefs.items():
-                            if b.confidence > 0.6:
-                                cand_score = score + b.confidence * 0.2 + rel.trust * 0.2
-                                cand_factors = dict(factors)
-                                cand_factors["belief_confidence"] = b.confidence * 0.2
-                                cand_factors["trust_in_target"] = rel.trust * 0.2
-                                cands.append(
-                                    CandidateAction(
-                                        action=Action(kind="gossip", target=rel_id, payload={"subject": b.subject}),
-                                        base_utility=cand_score,
-                                        factors=cand_factors
-                                    )
+                for rel_id in _eligible_gossip_targets(state, observation):
+                    rel = state.relationships[rel_id]
+                    for b_id, b in state.beliefs.items():
+                        if b.confidence > 0.6:
+                            cand_score = score + b.confidence * 0.2 + rel.trust * 0.2
+                            cand_factors = dict(factors)
+                            cand_factors["belief_confidence"] = b.confidence * 0.2
+                            cand_factors["trust_in_target"] = rel.trust * 0.2
+                            cands.append(
+                                CandidateAction(
+                                    action=Action(kind="gossip", target=rel_id, payload={"subject": b.subject}),
+                                    base_utility=cand_score,
+                                    factors=cand_factors,
                                 )
+                            )
                 continue
 
             cands.append(
@@ -232,11 +259,13 @@ class ReferenceCognitiveAgent(UtilityNoMemoryAgent):
             return Action(kind="seek_safety"), expl
 
         # If the agent has high-confidence beliefs and trusted peers, gossip more often.
-        if action.kind == "socialize" and state.beliefs and state.relationships:
+        if action.kind == "socialize" and state.beliefs:
             best_b = max(state.beliefs.values(), key=lambda b: float(b.confidence))
             if float(best_b.confidence) >= 0.75:
-                # pick most trusted peer
-                peer = max(state.relationships.items(), key=lambda kv: float(kv[1].trust))[0]
+                eligible = _eligible_gossip_targets(state, observation)
+                if not eligible:
+                    return action, expl
+                peer = max(eligible, key=lambda rid: float(state.relationships[rid].trust))
                 expl.factors["belief_to_share"] = float(best_b.confidence)
                 expl.notes.append("High-confidence belief → gossip instead of idle socialize.")
                 return Action(kind="gossip", target=peer, payload={"subject": best_b.subject}), expl
@@ -251,17 +280,17 @@ class GossipDrivenAgent(UtilityNoMemoryAgent):
     misinformation behavior without changing the shared belief-update harness.
     """
 
-    def _most_trusted_peer(self, state: AgentState) -> str | None:
-        if not state.relationships:
+    def _most_trusted_peer(self, state: AgentState, observation: dict[str, object]) -> str | None:
+        eligible = _eligible_gossip_targets(state, observation)
+        if not eligible:
             return None
-        peer, rel = max(state.relationships.items(), key=lambda item: float(item[1].trust))
-        return peer if float(rel.trust) >= 0.0 else None
+        return max(eligible, key=lambda rid: float(state.relationships[rid].trust))
 
     def act(self, *, t: int, state: AgentState, observation: dict[str, object]) -> tuple[Action, ExplanationTrace]:
         if state.beliefs:
             best_b = max(state.beliefs.values(), key=lambda b: float(b.confidence))
             if float(best_b.confidence) >= 0.6:
-                peer = self._most_trusted_peer(state)
+                peer = self._most_trusted_peer(state, observation)
                 if peer is not None:
                     return (
                         Action(kind="gossip", target=peer, payload={"subject": best_b.subject}),
@@ -304,11 +333,11 @@ class ReputationProbeAgent(BaseAgent):
             return None
         return max(state.beliefs.values(), key=lambda b: float(b.confidence))
 
-    def _most_trusted_peer(self, state: AgentState) -> str | None:
-        if not state.relationships:
+    def _most_trusted_peer(self, state: AgentState, observation: dict[str, object]) -> str | None:
+        eligible = _eligible_gossip_targets(state, observation)
+        if not eligible:
             return None
-        peer, rel = max(state.relationships.items(), key=lambda item: float(item[1].trust))
-        return peer if float(rel.trust) >= 0.0 else None
+        return max(eligible, key=lambda rid: float(state.relationships[rid].trust))
 
     def act(self, *, t: int, state: AgentState, observation: dict[str, object]) -> tuple[Action, ExplanationTrace]:
         belief = self._strongest_belief(state)
@@ -323,7 +352,7 @@ class ReputationProbeAgent(BaseAgent):
                     ),
                 )
 
-            peer = self._most_trusted_peer(state)
+            peer = self._most_trusted_peer(state, observation)
             if peer is not None and float(belief.confidence) >= 0.75:
                 return (
                     Action(kind="gossip", target=peer, payload={"subject": belief.subject}),
